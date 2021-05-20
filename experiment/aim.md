@@ -1,1 +1,3 @@
-### Aim of the experiment
+Image segmentation is a common task which arises in many situations such as extracting a face or a character in a text from an image before performing automatic recognition. Generally, it is used to separate the foreground pixels belonging to the object(s) of interest, from the background pixels. S egmentation aims to partition a given image into a set of regions having following properties: connectivity and homogeneity in terms of color or texture.
+
+An object or region can be a characterized using multiple low-level features such as brightness, colour, texture, etc. In this experiment, we will restrict ourselves to objects defined by brightness. We will aim to partition a given image into two (foreground and background) and study two techniques namely, histogram-based thresholding and region growing, to perform this partitioning. 
