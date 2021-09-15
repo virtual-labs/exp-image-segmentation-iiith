@@ -14,6 +14,13 @@
       "content-type": "text"
     },
     {
+      "target": "objective.html",
+      "source": "objective.md",
+      "label": "Objective",
+      "unit-type": "task",
+      "content-type": "text"
+    },
+    {
       "target": "pretest.html",
       "source": "pretest.json",
       "label": "Pretest",
@@ -36,10 +43,17 @@
     },
     {
       "target": "assignment.html",
-      "source": "assignment.md",
+      "source": "assignment/index.html",
       "label": "Assignment",
       "unit-type": "task",
-      "content-type": "text"
+      "content-type": "simulation"
+    },
+    {
+      "target": "posttest.html",
+      "source": "posttest.json",
+      "label": "Posttest",
+      "unit-type": "task",
+      "content-type": "assesment"
     },
     {
       "target": "references.html",
