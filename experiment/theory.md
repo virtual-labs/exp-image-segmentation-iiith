@@ -34,15 +34,12 @@ The Otsu threshold is the most standard threshold technique used in image proces
 
 The within-class variance is defined as:
 
-<img src="images/image005.gif">
+<img src="images/image005.gif">  
  
-
- 
-
 Where,
 
 	
-<img src="images/image007.gif"> <img src="segment/images/image006.gif">
+<img src="images/image007.gif"> <img src="images/image006.gif">
  
 
 <img src="images/image008.gif">
