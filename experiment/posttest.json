@@ -1,18 +1,20 @@
 [
-{"question":"This is a Sample Question 1?",
+{"question":"1. Increasing the range in mean or variance based region growing results in larger size regions",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"True",
+            "b":"False",
+            "c":"False",
+            "d":"No effect"
           },
 "correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
+
+{"question":"2. The result of region growing will be affected if an image is corrupted with noise",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"True",
+            "b":"False",
+            "c":"Depends on the image content",
+            "d":"Depends on the type of noise"
           },
-"correctAnswer":"c"} 
+"correctAnswer":"c"}
+
 ]

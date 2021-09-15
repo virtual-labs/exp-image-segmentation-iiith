@@ -1,18 +1,20 @@
 [
-{"question":"This is a Sample Question 1?",
+{"question":"1. Which of the thresholding technique is appropriate when image histogram has more than two modes",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"Single threshold",
+            "b":"Double threshold",
+            "c":"Otsu threshold",
+            "d":"Result is invariant to the underlying thresholding method"
           },
 "correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
+
+{"question":"2. Single threshold and Otsu threshold can give same output when image histogram",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"Bi-modal",
+            "b":"Single Modal",
+            "c":"More than two modes",
+            "d":"Never"
           },
-"correctAnswer":"c"} 
+"correctAnswer":"c"}
+
 ]
