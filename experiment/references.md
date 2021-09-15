@@ -1,8 +1,7 @@
 **Basic web references**
 
-1. Lecture Notes in Digital Image Processing http://eeweb.poly.edu/~onur/lectures/lectures.html
-2. Advanced Image Processing Lab http://www.eng.tau.ac.il/~yaro/lectnotes/
-3. Digital Image Processing http://www.cs.nmt.edu/~ip/lectures.html
+1. Advanced Image Processing Lab http://www.eng.tau.ac.il/~yaro/lectnotes/
+2. Digital Image Processing http://www.cs.nmt.edu/~ip/lectures.html
 
 **Books:**
 
