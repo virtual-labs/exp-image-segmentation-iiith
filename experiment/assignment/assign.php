@@ -6,7 +6,7 @@ $exp=$_GET["exp"];
 <head>
 <script class='gtm'>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W59SWTR');</script>
 
-<title> Assignment - Virtual Lab in Image Processing</title>
+<!--<title> Assignment - Virtual Lab in Image Processing</title>-->
 <!-- The Primary External CSS style sheet. -->
 <link rel="stylesheet" type="text/css" href="css/psd2css.css" media="screen" />
 
@@ -39,15 +39,15 @@ at http://jquery.com
       <!-- This is 'IIIT' -->
       <!-- <div id="Layer-6" class="IIIT"  >
         <img src="images/iiit.png" width="100" height="70" alt="IIIT" class="pngimg" />
-	</div>
+	</div>-->
 	
-			<div id="topMenu">
+		<!--	<div id="topMenu">
 			<h1>VIRTUAL LAB in IMAGE PROCESSING</h1>
 <div class="home">
 <a href="index.html">home</a>
-</div>
+</div>-->
 
-			<div class="menu">
+		<1--	<div class="menu">
 <ul>
 <li><a href="objective.php?exp=<?php echo $exp; ?>" target="_self" >Objective</a>
 </li>
