@@ -1,0 +1,10 @@
+im_color.cpp 
+im_colhist.cpp
+im_coladapthist.cpp
+im_colpoint.cpp
+im_colunsharpmasking.cpp
+im_unsharpmasking.cpp
+
+-> these are completed...
+
+Histogram bin filtering part for grayscale is left, will give it to you by tonight
