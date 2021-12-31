@@ -39,9 +39,9 @@ at http://jquery.com
       <!-- This is 'IIIT' -->
       <!-- <div id="Layer-6" class="IIIT"  >
         <img src="images/iiit.png" width="100" height="70" alt="IIIT" class="pngimg" />
-	</div>
+	</div>-->
 	
-			<div id="topMenu">
+		<!--	<div id="topMenu">
 			<h1>VIRTUAL LAB in IMAGE PROCESSING</h1>
 <div class="home">
 <a href="index.html">home</a>
@@ -58,20 +58,20 @@ at http://jquery.com
 <li><a href="procedure.php?exp=<?php echo $exp; ?>" target="_self" >Procedure</a>
 </li>
 <li><a href="<?php echo $exp; ?>.php" target="_self" >Experiment</a>
-</li> --> 
-<!-- <li><sel><a href="#" target="_self" >Assessment</a>
+</li> 
+<li><sel><a href="#" target="_self" >Assessment</a>
 </sel>
- -->		<!-- 		<ul>
-					<li><a href="quiz.php?exp=<?php echo $exp; ?>">Quiz</a></li> -->
+ 		 		<ul>
+					<li><a href="quiz.php?exp=<?php echo $exp; ?>">Quiz</a></li> 
 					<li><a href="assign.php?exp=<?php echo $exp; ?>">Assignment</a></li>
-			   <!-- </ul>
+			    </ul>
 
-</li> -->
-<!-- <li><a href="references.php?exp=<?php echo $exp; ?>" target="_self" >References</a>
-</li> -->
+</li> 
+<li><a href="references.php?exp=<?php echo $exp; ?>" target="_self" >References</a>
+</li> 
 </ul>
 </div>
-</div>
+</div> -->
 <div class="experiment front" style="text-indent: 20px; background-color: #DDDDDD;" >
 
 <b>Obtain the figure of the right from the figure on the left.</b>
