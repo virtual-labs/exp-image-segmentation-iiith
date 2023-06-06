@@ -1,0 +1,460 @@
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/carpe-slider.js
+   91:6   warning  'evnt' is already defined             no-redeclare
+  180:10  warning  'resetPos' is defined but never used  no-unused-vars
+  207:11  warning  'i' is already defined                no-redeclare
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/jquery-1.4.2.min.js
+   19:199  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:9    warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:486  warning  Unnecessary escape character: \[                                 no-useless-escape
+   20:488  warning  Unnecessary escape character: \.                                 no-useless-escape
+   22:49   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   22:285  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   26:277  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   27:191  warning  Empty block statement                                            no-empty
+   28:289  warning  Unnecessary escape character: \/                                 no-useless-escape
+   28:385  warning  Unnecessary escape character: \-                                 no-useless-escape
+   32:189  warning  Unnecessary escape character: \/                                 no-useless-escape
+   32:235  warning  Unnecessary escape character: \/                                 no-useless-escape
+   35:257  warning  Empty block statement                                            no-empty
+   44:325  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   48:523  warning  Unnecessary escape character: \.                                 no-useless-escape
+   48:525  warning  Unnecessary escape character: \|                                 no-useless-escape
+   49:211  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   49:423  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:171  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:331  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   52:271  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   53:487  warning  Empty block statement                                            no-empty
+   54:261  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   54:327  warning  Empty block statement                                            no-empty
+   60:185  warning  Empty block statement                                            no-empty
+   69:272  warning  Empty block statement                                            no-empty
+   70:573  warning  Unnecessary escape character: \[                                 no-useless-escape
+   74:59   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   75:47   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   76:201  warning  Unnecessary escape character: \*                                 no-useless-escape
+   76:403  warning  Unnecessary escape character: \)                                 no-useless-escape
+   76:412  warning  Unnecessary escape character: \(                                 no-useless-escape
+   76:414  warning  Unnecessary escape character: \)                                 no-useless-escape
+   77:141  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   77:498  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   78:395  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:204  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:287  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+   84:304  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   86:378  warning  Unnecessary escape character: \[                                 no-useless-escape
+   86:390  warning  Unnecessary escape character: \(                                 no-useless-escape
+   89:427  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   91:447  warning  Empty block statement                                            no-empty
+   93:83   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   93:210  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  109:483  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  113:444  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  116:263  warning  Move function declaration to function body root                  no-inner-declarations
+  117:475  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  119:438  warning  Unnecessary escape character: \/                                 no-useless-escape
+  123:283  warning  Empty block statement                                            no-empty
+  125:414  warning  Empty block statement                                            no-empty
+  128:269  warning  Empty block statement                                            no-empty
+  130:21   warning  Empty block statement                                            no-empty
+  131:28   warning  Empty block statement                                            no-empty
+  146:267  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:362  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:458  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/jquery-1.js
+   19:199  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:9    warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:486  warning  Unnecessary escape character: \[                                 no-useless-escape
+   20:488  warning  Unnecessary escape character: \.                                 no-useless-escape
+   22:49   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   22:285  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   26:277  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   27:191  warning  Empty block statement                                            no-empty
+   28:289  warning  Unnecessary escape character: \/                                 no-useless-escape
+   28:385  warning  Unnecessary escape character: \-                                 no-useless-escape
+   32:189  warning  Unnecessary escape character: \/                                 no-useless-escape
+   32:235  warning  Unnecessary escape character: \/                                 no-useless-escape
+   35:257  warning  Empty block statement                                            no-empty
+   44:325  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   48:523  warning  Unnecessary escape character: \.                                 no-useless-escape
+   48:525  warning  Unnecessary escape character: \|                                 no-useless-escape
+   49:211  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   49:423  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:171  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:331  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   52:271  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   53:487  warning  Empty block statement                                            no-empty
+   54:261  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   54:327  warning  Empty block statement                                            no-empty
+   60:185  warning  Empty block statement                                            no-empty
+   69:272  warning  Empty block statement                                            no-empty
+   70:573  warning  Unnecessary escape character: \[                                 no-useless-escape
+   74:59   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   75:47   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   76:201  warning  Unnecessary escape character: \*                                 no-useless-escape
+   76:403  warning  Unnecessary escape character: \)                                 no-useless-escape
+   76:412  warning  Unnecessary escape character: \(                                 no-useless-escape
+   76:414  warning  Unnecessary escape character: \)                                 no-useless-escape
+   77:141  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   77:498  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   78:395  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:204  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:287  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+   84:304  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   86:378  warning  Unnecessary escape character: \[                                 no-useless-escape
+   86:390  warning  Unnecessary escape character: \(                                 no-useless-escape
+   89:427  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   91:447  warning  Empty block statement                                            no-empty
+   93:83   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   93:210  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  109:483  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  113:444  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  116:263  warning  Move function declaration to function body root                  no-inner-declarations
+  117:475  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  119:438  warning  Unnecessary escape character: \/                                 no-useless-escape
+  123:283  warning  Empty block statement                                            no-empty
+  125:414  warning  Empty block statement                                            no-empty
+  128:269  warning  Empty block statement                                            no-empty
+  130:21   warning  Empty block statement                                            no-empty
+  131:28   warning  Empty block statement                                            no-empty
+  146:267  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:362  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:458  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/jquery-ui-1.8.4.custom.min.js
+   17:139  warning  'jQuery' is not defined                                          no-undef
+   18:1    warning  Unnecessary semicolon                                            no-extra-semi
+   32:198  warning  'jQuery' is not defined                                          no-undef
+   33:1    warning  Unnecessary semicolon                                            no-extra-semi
+   48:25   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   49:248  warning  'jQuery' is not defined                                          no-undef
+   50:1    warning  Unnecessary semicolon                                            no-extra-semi
+   79:215  warning  'jQuery' is not defined                                          no-undef
+   80:1    warning  Unnecessary semicolon                                            no-extra-semi
+  103:239  warning  'jQuery' is not defined                                          no-undef
+  104:1    warning  Unnecessary semicolon                                            no-extra-semi
+  136:423  warning  'jQuery' is not defined                                          no-undef
+  137:1    warning  Unnecessary semicolon                                            no-extra-semi
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/jquery.flot.js
+    28:13    warning  'jQuery' is not defined                                          no-undef
+    28:29    warning  'jQuery' is not defined                                          no-undef
+    28:618   warning  'jQuery' is not defined                                          no-undef
+    28:676   warning  'jQuery' is not defined                                          no-undef
+    28:799   warning  'jQuery' is not defined                                          no-undef
+    28:882   warning  'jQuery' is not defined                                          no-undef
+    28:905   warning  'jQuery' is not defined                                          no-undef
+    28:944   warning  'jQuery' is not defined                                          no-undef
+    28:965   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1109  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1299  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1331  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1361  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1391  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1488  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1521  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1551  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1581  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1723  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1853  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1992  warning  'jQuery' is not defined                                          no-undef
+   350:29    warning  'length' is defined but never used                               no-unused-vars
+   351:32    warning  'x' is defined but never used                                    no-unused-vars
+   351:35    warning  'y' is defined but never used                                    no-unused-vars
+   400:17    warning  'insertSteps' is not defined                                     no-undef
+   450:29    warning  'insertSteps' is not defined                                     no-undef
+   661:29    warning  'dummyDiv' is already defined                                    no-redeclare
+   682:22    warning  'i' is not defined                                               no-undef
+   682:29    warning  'i' is not defined                                               no-undef
+   682:50    warning  'i' is not defined                                               no-undef
+   683:65    warning  'i' is not defined                                               no-undef
+   683:91    warning  'i' is not defined                                               no-undef
+   924:25    warning  'fmt' is not defined                                             no-undef
+   927:29    warning  'fmt' is not defined                                             no-undef
+   929:29    warning  'fmt' is not defined                                             no-undef
+   932:25    warning  'fmt' is not defined                                             no-undef
+   935:29    warning  'fmt' is not defined                                             no-undef
+   937:29    warning  'fmt' is not defined                                             no-undef
+   940:25    warning  'fmt' is not defined                                             no-undef
+   942:49    warning  'fmt' is not defined                                             no-undef
+  1074:33    warning  'reverse' is defined but never used                              no-unused-vars
+  1724:18    warning  'i' is not defined                                               no-undef
+  1724:25    warning  'i' is not defined                                               no-undef
+  1724:46    warning  'i' is not defined                                               no-undef
+  1725:28    warning  'i' is not defined                                               no-undef
+  1730:21    warning  'i' is not defined                                               no-undef
+  1798:30    warning  'foundPoint' is assigned a value but never used                  no-unused-vars
+  1846:29    warning  'x' is already defined                                           no-redeclare
+  1846:44    warning  'y' is already defined                                           no-redeclare
+  2119:4     warning  'jQuery' is not defined                                          no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/jquery.imgareaselect.js
+  191:9   warning  Expected a 'break' statement before 'case'                       no-fallthrough
+  254:25  warning  'event' is defined but never used                                no-unused-vars
+  291:4   warning  'set_crop' is not defined                                        no-undef
+  292:20  warning  Mixed spaces and tabs                                            no-mixed-spaces-and-tabs
+  292:22  warning  'toggleMosaic' is not defined                                    no-undef
+  493:13  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+  501:13  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+  539:14  warning  'option' is not defined                                          no-undef
+  540:25  warning  'option' is not defined                                          no-undef
+  541:33  warning  'option' is not defined                                          no-undef
+  541:50  warning  'option' is not defined                                          no-undef
+  570:17  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  602:13  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  604:13  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  610:17  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  612:17  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  717:4   warning  'jQuery' is not defined                                          no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/modernizr-1.5.min.js
+  12:496  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  20:134  warning  Unexpected constant condition                                    no-constant-condition
+  25:51   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/pageload.js
+   1:10  warning  'loadPage' is defined but never used  no-unused-vars
+  13:15  warning  'ActiveXObject' is not defined        no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/assignment/js/psd2css.js
+   9:1   warning  '$' is not defined              no-undef
+  13:5   warning  'DD_belatedPNG' is not defined  no-undef
+  20:3   warning  '$' is not defined              no-undef
+  21:26  warning  '$' is not defined              no-undef
+  21:49  warning  '$' is not defined              no-undef
+  22:17  warning  '$' is not defined              no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/carpe-slider.js
+   91:6   warning  'evnt' is already defined             no-redeclare
+  180:10  warning  'resetPos' is defined but never used  no-unused-vars
+  207:11  warning  'i' is already defined                no-redeclare
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/jquery-1.4.2.min.js
+   19:199  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:9    warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:486  warning  Unnecessary escape character: \[                                 no-useless-escape
+   20:488  warning  Unnecessary escape character: \.                                 no-useless-escape
+   22:49   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   22:285  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   26:277  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   27:191  warning  Empty block statement                                            no-empty
+   28:289  warning  Unnecessary escape character: \/                                 no-useless-escape
+   28:385  warning  Unnecessary escape character: \-                                 no-useless-escape
+   32:189  warning  Unnecessary escape character: \/                                 no-useless-escape
+   32:235  warning  Unnecessary escape character: \/                                 no-useless-escape
+   35:257  warning  Empty block statement                                            no-empty
+   44:325  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   48:523  warning  Unnecessary escape character: \.                                 no-useless-escape
+   48:525  warning  Unnecessary escape character: \|                                 no-useless-escape
+   49:211  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   49:423  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:171  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:331  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   52:271  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   53:487  warning  Empty block statement                                            no-empty
+   54:261  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   54:327  warning  Empty block statement                                            no-empty
+   60:185  warning  Empty block statement                                            no-empty
+   69:272  warning  Empty block statement                                            no-empty
+   70:573  warning  Unnecessary escape character: \[                                 no-useless-escape
+   74:59   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   75:47   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   76:201  warning  Unnecessary escape character: \*                                 no-useless-escape
+   76:403  warning  Unnecessary escape character: \)                                 no-useless-escape
+   76:412  warning  Unnecessary escape character: \(                                 no-useless-escape
+   76:414  warning  Unnecessary escape character: \)                                 no-useless-escape
+   77:141  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   77:498  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   78:395  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:204  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:287  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+   84:304  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   86:378  warning  Unnecessary escape character: \[                                 no-useless-escape
+   86:390  warning  Unnecessary escape character: \(                                 no-useless-escape
+   89:427  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   91:447  warning  Empty block statement                                            no-empty
+   93:83   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   93:210  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  109:483  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  113:444  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  116:263  warning  Move function declaration to function body root                  no-inner-declarations
+  117:475  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  119:438  warning  Unnecessary escape character: \/                                 no-useless-escape
+  123:283  warning  Empty block statement                                            no-empty
+  125:414  warning  Empty block statement                                            no-empty
+  128:269  warning  Empty block statement                                            no-empty
+  130:21   warning  Empty block statement                                            no-empty
+  131:28   warning  Empty block statement                                            no-empty
+  146:267  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:362  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:458  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/jquery-1.js
+   19:199  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:9    warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   20:486  warning  Unnecessary escape character: \[                                 no-useless-escape
+   20:488  warning  Unnecessary escape character: \.                                 no-useless-escape
+   22:49   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   22:285  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   26:277  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   27:191  warning  Empty block statement                                            no-empty
+   28:289  warning  Unnecessary escape character: \/                                 no-useless-escape
+   28:385  warning  Unnecessary escape character: \-                                 no-useless-escape
+   32:189  warning  Unnecessary escape character: \/                                 no-useless-escape
+   32:235  warning  Unnecessary escape character: \/                                 no-useless-escape
+   35:257  warning  Empty block statement                                            no-empty
+   44:325  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   48:523  warning  Unnecessary escape character: \.                                 no-useless-escape
+   48:525  warning  Unnecessary escape character: \|                                 no-useless-escape
+   49:211  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   49:423  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:171  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   51:331  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   52:271  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   53:487  warning  Empty block statement                                            no-empty
+   54:261  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   54:327  warning  Empty block statement                                            no-empty
+   60:185  warning  Empty block statement                                            no-empty
+   69:272  warning  Empty block statement                                            no-empty
+   70:573  warning  Unnecessary escape character: \[                                 no-useless-escape
+   74:59   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   75:47   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   76:201  warning  Unnecessary escape character: \*                                 no-useless-escape
+   76:403  warning  Unnecessary escape character: \)                                 no-useless-escape
+   76:412  warning  Unnecessary escape character: \(                                 no-useless-escape
+   76:414  warning  Unnecessary escape character: \)                                 no-useless-escape
+   77:141  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   77:498  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   78:395  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:204  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   84:287  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+   84:304  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   86:378  warning  Unnecessary escape character: \[                                 no-useless-escape
+   86:390  warning  Unnecessary escape character: \(                                 no-useless-escape
+   89:427  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   91:447  warning  Empty block statement                                            no-empty
+   93:83   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   93:210  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  109:483  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  113:444  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  116:263  warning  Move function declaration to function body root                  no-inner-declarations
+  117:475  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  119:438  warning  Unnecessary escape character: \/                                 no-useless-escape
+  123:283  warning  Empty block statement                                            no-empty
+  125:414  warning  Empty block statement                                            no-empty
+  128:269  warning  Empty block statement                                            no-empty
+  130:21   warning  Empty block statement                                            no-empty
+  131:28   warning  Empty block statement                                            no-empty
+  146:267  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:362  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  152:458  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/jquery-ui-1.8.4.custom.min.js
+   17:139  warning  'jQuery' is not defined                                          no-undef
+   18:1    warning  Unnecessary semicolon                                            no-extra-semi
+   32:198  warning  'jQuery' is not defined                                          no-undef
+   33:1    warning  Unnecessary semicolon                                            no-extra-semi
+   48:25   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+   49:248  warning  'jQuery' is not defined                                          no-undef
+   50:1    warning  Unnecessary semicolon                                            no-extra-semi
+   79:215  warning  'jQuery' is not defined                                          no-undef
+   80:1    warning  Unnecessary semicolon                                            no-extra-semi
+  103:239  warning  'jQuery' is not defined                                          no-undef
+  104:1    warning  Unnecessary semicolon                                            no-extra-semi
+  136:423  warning  'jQuery' is not defined                                          no-undef
+  137:1    warning  Unnecessary semicolon                                            no-extra-semi
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/jquery.flot.js
+    28:13    warning  'jQuery' is not defined                                          no-undef
+    28:29    warning  'jQuery' is not defined                                          no-undef
+    28:618   warning  'jQuery' is not defined                                          no-undef
+    28:676   warning  'jQuery' is not defined                                          no-undef
+    28:799   warning  'jQuery' is not defined                                          no-undef
+    28:882   warning  'jQuery' is not defined                                          no-undef
+    28:905   warning  'jQuery' is not defined                                          no-undef
+    28:944   warning  'jQuery' is not defined                                          no-undef
+    28:965   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1109  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1299  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1331  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1361  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1391  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1488  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1521  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1551  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1581  warning  Unnecessary escape character: \%                                 no-useless-escape
+    28:1723  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1853  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+    28:1992  warning  'jQuery' is not defined                                          no-undef
+   350:29    warning  'length' is defined but never used                               no-unused-vars
+   351:32    warning  'x' is defined but never used                                    no-unused-vars
+   351:35    warning  'y' is defined but never used                                    no-unused-vars
+   400:17    warning  'insertSteps' is not defined                                     no-undef
+   450:29    warning  'insertSteps' is not defined                                     no-undef
+   661:29    warning  'dummyDiv' is already defined                                    no-redeclare
+   682:22    warning  'i' is not defined                                               no-undef
+   682:29    warning  'i' is not defined                                               no-undef
+   682:50    warning  'i' is not defined                                               no-undef
+   683:65    warning  'i' is not defined                                               no-undef
+   683:91    warning  'i' is not defined                                               no-undef
+   924:25    warning  'fmt' is not defined                                             no-undef
+   927:29    warning  'fmt' is not defined                                             no-undef
+   929:29    warning  'fmt' is not defined                                             no-undef
+   932:25    warning  'fmt' is not defined                                             no-undef
+   935:29    warning  'fmt' is not defined                                             no-undef
+   937:29    warning  'fmt' is not defined                                             no-undef
+   940:25    warning  'fmt' is not defined                                             no-undef
+   942:49    warning  'fmt' is not defined                                             no-undef
+  1074:33    warning  'reverse' is defined but never used                              no-unused-vars
+  1724:18    warning  'i' is not defined                                               no-undef
+  1724:25    warning  'i' is not defined                                               no-undef
+  1724:46    warning  'i' is not defined                                               no-undef
+  1725:28    warning  'i' is not defined                                               no-undef
+  1730:21    warning  'i' is not defined                                               no-undef
+  1798:30    warning  'foundPoint' is assigned a value but never used                  no-unused-vars
+  1846:29    warning  'x' is already defined                                           no-redeclare
+  1846:44    warning  'y' is already defined                                           no-redeclare
+  2119:4     warning  'jQuery' is not defined                                          no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/jquery.imgareaselect.js
+  191:9   warning  Expected a 'break' statement before 'case'                       no-fallthrough
+  254:25  warning  'event' is defined but never used                                no-unused-vars
+  291:4   warning  'set_crop' is not defined                                        no-undef
+  292:20  warning  Mixed spaces and tabs                                            no-mixed-spaces-and-tabs
+  292:22  warning  'toggleMosaic' is not defined                                    no-undef
+  493:13  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+  501:13  warning  Expected a 'break' statement before 'case'                       no-fallthrough
+  539:14  warning  'option' is not defined                                          no-undef
+  540:25  warning  'option' is not defined                                          no-undef
+  541:33  warning  'option' is not defined                                          no-undef
+  541:50  warning  'option' is not defined                                          no-undef
+  570:17  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  602:13  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  604:13  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  610:17  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  612:17  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  717:4   warning  'jQuery' is not defined                                          no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/modernizr-1.5.min.js
+  12:496  warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+  20:134  warning  Unexpected constant condition                                    no-constant-condition
+  25:51   warning  Expected a conditional expression and instead saw an assignment  no-cond-assign
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/pageload.js
+   1:10  warning  'loadPage' is defined but never used  no-unused-vars
+  13:15  warning  'ActiveXObject' is not defined        no-undef
+
+/home/runner/work/exp-image-segmentation-iiith/exp-image-segmentation-iiith/experiment/simulation/js/psd2css.js
+   9:1   warning  '$' is not defined              no-undef
+  13:5   warning  'DD_belatedPNG' is not defined  no-undef
+  20:3   warning  '$' is not defined              no-undef
+  21:26  warning  '$' is not defined              no-undef
+  21:49  warning  '$' is not defined              no-undef
+  22:17  warning  '$' is not defined              no-undef
+
+✖ 420 problems (0 errors, 420 warnings)
+  0 errors and 12 warnings potentially fixable with the `--fix` option.
+
