@@ -628,10 +628,10 @@ $("#sliderContent").replaceWith('      <div id="sliderContent" class="ui-corner-
 <div id="nextBox">
 </div>
  <div id="navig">
-      <?if (!isset($_GET["assess"]) && $_SESSION["piping"]!=99)  { ?> <button1>Select Image</button1>   <? } ?>
+      <?php if (!isset($_GET["assess"]) && $_SESSION["piping"]!=99)  { ?> <button1>Select Image</button1>   <?php } ?>
       <button4>Reset</button4>
       <button2>Run</button2>
-	 <?if($_SESSION["piping"]==99) { ?> <button7>Return to Piping</button7> <?php } ?>
+	 <?php if($_SESSION["piping"]==99) { ?> <button7>Return to Piping</button7> <?php } ?>
    <br/><br/> </div>
 
 
