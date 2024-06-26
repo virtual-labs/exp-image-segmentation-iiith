@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+$_GET["exp"]="segment";
+$_SESSION["piping"]=1;
 if($_GET["exp"]!="piping") {
 	if(isset($_GET["source"]) && isset($_GET["id"])) {
 		$_SESSION["currentS"]=$_GET["source"]; 
@@ -635,10 +636,10 @@ $("#sliderContent").replaceWith('      <div id="sliderContent" class="ui-corner-
 <div id="nextBox">
 </div>
  <div id="navig">
-      <?if (!isset($_GET["assess"]) && $_GET["exp"]!="piping")  { ?> <button1>Select Image</button1>   <? } ?>
+      <?php if (!isset($_GET["assess"]) && $_GET["exp"]!="piping")  { ?> <button1>Select Image</button1>   <?php } ?>
       <button4>Reset</button4>
       <button2>Run</button2>
-	 <?if($_GET["exp"]=="piping") { ?> <button7>Return to Piping</button7> <?php } ?>
+	 <?php if($_GET["exp"]=="piping") { ?> <button7>Return to Piping</button7> <?php } ?>
    <br/><br/> </div>
 
 

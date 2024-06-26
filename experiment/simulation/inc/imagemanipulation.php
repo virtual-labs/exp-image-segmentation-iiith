@@ -26,9 +26,7 @@ class ImageManipulation {
 	 *
 	 * @var array
 	 */
-	public $image = array('targetx'=>0, 
-							'targety'=>0,
-							'quality'=>75);
+	public $image = ['targetx'=>0, 'targety'=>0, 'quality'=>75];
 	
 	/**
 	 * A boolean value to detect if an image has not been created. This
@@ -46,7 +44,7 @@ class ImageManipulation {
      *
      * @param string $imgFile The image filename.
      */
-	public function ImageManipulation($imgfile)
+	public function __construct($imgfile)
 	{
 		//detect image format
 		$this->image["format"] = preg_replace('/^.*\.([^.]+)$/D', '$1', $imgfile);
