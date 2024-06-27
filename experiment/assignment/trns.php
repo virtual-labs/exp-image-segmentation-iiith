@@ -47,8 +47,8 @@ $sc2 = $_GET['sc2'];
 	$mesg[3]="";
 	$msg="";
 
-	$orr=str_split($order);
-	$arr =array($orr[0],$orr[2],$orr[4]) ;
+	$orr=str_split((string) $order);
+	$arr =[$orr[0], $orr[2], $orr[4]] ;
 	if($sc1!="0") {
 		if($sc2=="0"){
 			$mesg[$arr[0]] = "Upscale - ";
@@ -581,7 +581,7 @@ break;
 if($operation=="neigh") {
 if($_GET["args"]!="6") {
 
- $temp=explode("_",$_GET["args"]);
+ $temp=explode("_",(string) $_GET["args"]);
  $link = 'neigh.php?id='.$_SESSION["id"].'&source='.$_SESSION["currentS"].'&type='.($temp[0]+1).'&size='.$temp[1];	
 
 
