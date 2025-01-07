@@ -1,0 +1,1134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script class="gtm">
+      ;(function (w, d, s, l, i) {
+        w[l] = w[l] || []
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : ''
+        j.async = true
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+        f.parentNode.insertBefore(j, f)
+      })(window, document, 'script', 'dataLayer', 'GTM-W59SWTR')
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <!-- This file was originally generated at http://psd2cssonline.com on September 16, 2010, 10:04 am -->
+    <!-- psd2css Online version 1.85 -->
+
+    <!-- <title>Virtual Lab in Image Processing</title> -->
+
+    <!-- Some META tags to help with Search Engine Optimization.  Please
+note however that META tags are NOT a magic bullet to get your web page
+to the top of search engine rankings.  They are just part of that effort.  You
+can get more information by googling SEO or visiting the psd2css Online forums. -->
+    <meta name="description" content="Put the description of this page here" />
+    <meta
+      name="keywords"
+      content="Put keywords for this page here separated by commas"
+    />
+    <meta
+      name="generator"
+      content="psd2css Online - Dynamic Web Pages from your Photoshop Design in seconds"
+    />
+
+    <!-- The CSS Reset from Eric Meyers -->
+    <!-- <link rel="stylesheet" type="text/css" href="cssreset.css" media="screen" /> -->
+
+    <!-- The Primary External CSS style sheet. -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/psd2css.css"
+      media="screen"
+    />
+
+    <!-- We use the jquery javascript library for DOM manipulation and
+some javascript tricks.  We serve the script from Google because its
+faster than most ISPs.  Get more information and documentation
+at http://jquery.com
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+-->
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <!-- All the javascript generated for your design is in this file -->
+    <script type="text/javascript" src="js/psd2css.js"></script>
+
+    <!-- For Jquery UI-->
+    <script
+      type="text/javascript"
+      src="js/jquery-ui-1.8.4.custom.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/dark-hive/jquery-ui-1.8.4.custom.css"
+    />
+
+    <!-- For Slider - http://carpe.ambiprospect.com/slider/-->
+    <link type="text/css" rel="StyleSheet" href="css/carpe-slider.css" />
+    <script type="text/javascript" src="js/carpe-slider.js"></script>
+
+    <!--http://www.cssmenumaker.com/builder/menu_info.php?menu=057-->
+    <link type="text/css" rel="StyleSheet" href="menu/menu_style.css" />
+
+    <!--for ImgSelect - http://odyniec.net/projects/imgareaselect/-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/imgareaselect-default.css"
+    />
+    <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>
+
+    <!--for Flot -->
+    <script type="text/javascript" src="js/jquery.flot.js"></script>
+
+    <!--for COntent Slider - Jquery Slider/-->
+    <link rel="stylesheet" type="text/css" href="css/jquery-slider.css" />
+
+    <!-- opencv.js  -->
+    <script
+      async
+      src="https://docs.opencv.org/4.10.0/opencv.js"
+      type="text/javascript"
+    ></script>
+
+    <script type="text/javascript">
+      var inputMosaic = null
+      var croppedImage = null
+      var processedImage = null
+
+      function blinker(i) {
+        if (buttId != 'cancel' && i > 0) {
+          $($(buttId), '#Layer-2').toggleClass('ui-state-hover')
+          setTimeout('blinker(' + (i - 1) + ')', 500)
+        }
+      }
+
+      function set_state(state) {
+        switch (state) {
+          case 0:
+            $('#nextBox').html(
+              "Start the Experiment by clicking on 'Select Image' and selecting an Input Image from the Mosaic"
+            )
+            buttId = 'button1'
+            blinker(10)
+            break
+          case 1:
+            if (assess) {
+              loadImage('images/assess/segment1_1.png').then((cImage) => {
+                croppedImage = cImage
+              })
+            }
+            $('#nextBox').html(
+              "Select appropriate parameters and click on 'Run'."
+            )
+            buttId = 'button2'
+            blinker(10)
+            break
+          case 2:
+            $('#nextBox').html(
+              'Observe the result and try different operations with different secondary Images.'
+            )
+            break
+          case 3:
+            $('#nextBox').html('Select the thresholds from the histograms')
+            blinker(10)
+            break
+        }
+        jstate = state
+      }
+
+      function toggleMosaic() {
+        var ias = $('#Mosaic').imgAreaSelect({ instance: true })
+        if ($('#Mosaic').is(':visible')) {
+          ias.setOptions({ hide: true })
+          $('#Mosaic').hide('slow')
+        } else {
+          $('#Mosaic').show('slow', function () {
+            ias.setOptions({ show: true })
+            ias.update()
+          })
+        }
+      }
+
+      function set_crop() {
+        set_state(1)
+
+        var ias = $('#Mosaic').imgAreaSelect({ instance: true })
+        var sel = ias.getSelection()
+
+        loadImage('images/Mosaicsegment.png').then((inputMat) => {
+          inputMosaic = inputMat
+
+          cropImage(
+            inputMat,
+            'layer4Image',
+            sel.x1,
+            sel.y1,
+            sel.width,
+            sel.height
+          )
+        })
+      }
+
+      function cropImage(inputMat, output_img, x, y, w, h) {
+        let src = inputMat
+        let rect = new cv.Rect(x, y, w, h)
+        let dst = new cv.Mat(w, h, cv.CV_8UC3)
+        dst = src.roi(rect)
+        croppedImage = dst.clone()
+        let canvas = document.createElement('canvas')
+        cv.imshow(canvas, dst)
+        let dataUrl = canvas.toDataURL()
+        let croppedImageElement = document.getElementById(output_img)
+        croppedImageElement.src = dataUrl
+        src.delete()
+        dst.delete()
+      }
+
+      function doTransform() {
+        if (jstate == 0) {
+          alert('First click on Mosaic and select the Input Image.')
+          return
+        }
+
+        var args
+        var checkBoxes = $('input[name=choice]')
+
+        $.each(checkBoxes, function () {
+          if ($(this).attr('checked')) {
+            args = $(this).attr('value')
+          }
+        })
+
+        if (args == 1) {
+          // histogram based segmentation
+          checkBoxes = $('input[name=option1]')
+          // Man1, Man2, Auto
+          $.each(checkBoxes, function () {
+            if ($(this).attr('checked')) {
+              args = $(this).attr('value')
+            }
+          })
+        }
+
+        let basedOnVariance = false
+        let useLast10Pixels= false
+        let deviation = 0
+        if (args != 'Auto' && args != 'Man1 ' && args != 'Man2') {
+          if ($('#regionG').attr('checked')) {
+            checkBoxes = $('input[name=option3]')
+            $.each(checkBoxes, function () {
+              if ($(this).attr('checked')) {
+                if ($(this).attr('value') === '2') {
+                  useLast10Pixels = true
+                }
+              }
+            })
+          } else {
+            basedOnVariance=true
+            checkBoxes = $('input[name=option4]')
+            $.each(checkBoxes, function () {
+              if ($(this).attr('checked')) {
+                if ($(this).attr('value') === '2') {
+                  useLast10Pixels = true
+                }
+              }
+            })
+          }
+
+          if ($('#regionG').attr('checked')) {
+            deviation = $('#slider-Dev').slider('option', 'value')
+          } else {
+            deviation = $('#slider-Dev2').slider('option', 'value')
+          }
+        }
+        if (!$('#Mosaic').is(':visible')) {
+          if (args === 'Auto') {
+            applyOtsuThreshold(croppedImage)
+            set_state(2)
+          } else if (args === 'Man2') {
+            set_state(3)
+            drawHistogram(2)
+            set_state(2)
+          } else if (args === 'Man1') {
+            set_state(3)
+            drawHistogram(1)
+            set_state(2)
+          } else {
+            const seedPoint = {
+              x: Math.floor(croppedImage.cols / 2),
+              y: Math.floor(croppedImage.rows / 2),
+            }
+            regionGrowing(
+              croppedImage,
+              seedPoint,
+              deviation,
+              useLast10Pixels,
+              basedOnVariance
+            )
+          }
+        }
+      }
+      function toggleHistogramVisibility(visible, flag) {
+        const displayStyle = visible ? 'block' : 'none'
+        document.getElementById('threSelect').style.display = displayStyle
+        document.getElementById('start').style.display = displayStyle
+        if (flag === 2) {
+          document.getElementById('end').style.display = displayStyle
+        }
+        document.getElementById('button3').style.display = displayStyle
+      }
+
+      function drawHistogram(flag) {
+        let gray = new cv.MatVector()
+        gray.push_back(croppedImage)
+        let accumulate = false
+        let channels = [0]
+        let histSize = [256]
+        let ranges = [0, 255]
+        let hist = new cv.Mat()
+        let mask = new cv.Mat()
+        let color = new cv.Scalar(255, 255, 0)
+        let scale = 2
+        // You can try more different parameters
+        cv.calcHist(gray, channels, mask, hist, histSize, ranges, accumulate)
+
+        const histogramCanvas = document.getElementById('threSelect')
+        const ctx = histogramCanvas.getContext('2d')
+        ctx.clearRect(0, 0, histogramCanvas.width, histogramCanvas.height)
+        ctx.fillStyle = 'black'
+
+        const max = Math.max(...hist.data32F)
+        for (let i = 0; i < hist.rows; i++) {
+          const binVal = hist.data32F[i]
+          const scaled = (binVal / max) * histogramCanvas.height
+          ctx.fillRect(i, histogramCanvas.height - scaled, 1, scaled)
+        }
+        toggleHistogramVisibility(true, flag)
+        let thresholds = flag === 1 ? [50] : [50, 200] // Default thresholds based on mode
+
+        const updateThresholdMarkers = () => {
+          const startDiv = document.getElementById('start')
+          const endDiv = document.getElementById('end')
+
+          // Update marker positions
+          startDiv.style.left = `${
+            310 + thresholds[0] * (histogramCanvas.width / 256)
+          }px` // Adjust left position
+          if (thresholds.length === 1) {
+            endDiv.style.display = 'none'
+          } else {
+            endDiv.style.left = `${
+              310 + thresholds[1] * (histogramCanvas.width / 256)
+            }px`
+            endDiv.style.display = 'block'
+          }
+        }
+
+        updateThresholdMarkers()
+
+        histogramCanvas.onclick = (event) => {
+          const rect = histogramCanvas.getBoundingClientRect()
+          const x = event.clientX - rect.left
+          const newThreshold = Math.round((x / histogramCanvas.width) * 256) // Map canvas x-coordinate to intensity value
+
+          if (thresholds.length < 2) {
+            thresholds[0] = newThreshold
+          } else {
+            // Replace the closest threshold to the click position
+            const closestIndex =
+              Math.abs(thresholds[0] - newThreshold) <
+              Math.abs(thresholds[1] - newThreshold)
+                ? 0
+                : 1
+            thresholds[closestIndex] = newThreshold
+          }
+
+          thresholds.sort((a, b) => a - b) // Ensure thresholds are in ascending order
+          // alert(`Thresholds updated: ${thresholds.join(', ')}`)
+          updateThresholdMarkers()
+        }
+        // applySingleThreshold(thresholds)
+        document
+          .getElementById('button3')
+          .addEventListener('click', function () {
+            if (flag === 1) {
+              applySingleThreshold(thresholds)
+            } else {
+              applyDoubleThreshold(thresholds)
+            }
+          })
+
+        hist.delete()
+      }
+
+      function applySingleThreshold(thresholds) {
+        if (thresholds.length < 1) {
+          alert('Please select a single threshold.')
+          return
+        }
+        const result = new cv.Mat()
+        let gray = new cv.Mat()
+        cv.cvtColor(croppedImage, gray, cv.COLOR_RGBA2GRAY, 0)
+
+        cv.threshold(gray, result, thresholds[0], 255, cv.THRESH_BINARY)
+        processedImage = result
+        let content = `<div class="item">
+          <h2>Initial Image</h2>
+          <img id="primaryImage" alt="picture" width="140px" height="140px"/>
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+          <h2>Processed Image</h2>
+          <img id="processedImage" alt="picture" width="140px" height="140px"/>
+        </div><br><br>`
+
+        $('#sliderContent').html(content)
+
+        let canvas = document.createElement('canvas')
+        cv.imshow(canvas, processedImage)
+        document.getElementById('processedImage').src = canvas.toDataURL()
+        document.getElementById('layer5outputImage').src = canvas.toDataURL()
+
+        let canvas1 = document.createElement('canvas')
+        cv.imshow(canvas1, croppedImage)
+        document.getElementById('primaryImage').src = canvas1.toDataURL()
+
+        toggleHistogramVisibility(false, 1)
+        result.delete()
+      }
+
+      function applyDoubleThreshold(thresholds) {
+        if (thresholds.length < 2) {
+          alert('Please select two thresholds.')
+          return
+        }
+        const lower = Math.min(...thresholds)
+        const upper = Math.max(...thresholds)
+        const result = new cv.Mat()
+        const mask1 = new cv.Mat()
+        const mask2 = new cv.Mat()
+        let gray = new cv.Mat()
+        cv.cvtColor(croppedImage, gray, cv.COLOR_RGBA2GRAY, 0)
+
+        cv.threshold(gray, mask1, lower, 255, cv.THRESH_BINARY)
+        cv.threshold(gray, mask2, upper, 255, cv.THRESH_BINARY_INV)
+        cv.bitwise_and(mask1, mask2, result)
+
+        processedImage = result
+        let content = `<div class="item">
+          <h2>Initial Image</h2>
+          <img id="primaryImage" alt="picture" width="140px" height="140px"/>
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+          <h2>Processed Image</h2>
+          <img id="processedImage" alt="picture" width="140px" height="140px"/>
+        </div><br><br>`
+
+        $('#sliderContent').html(content)
+
+        let canvas = document.createElement('canvas')
+        cv.imshow(canvas, processedImage)
+        document.getElementById('processedImage').src = canvas.toDataURL()
+        document.getElementById('layer5outputImage').src = canvas.toDataURL()
+
+        let canvas1 = document.createElement('canvas')
+        cv.imshow(canvas1, croppedImage)
+        document.getElementById('primaryImage').src = canvas1.toDataURL()
+        console.log('false')
+        toggleHistogramVisibility(false, 2)
+        result.delete()
+        mask1.delete()
+        mask2.delete()
+      }
+
+      function applyOtsuThreshold(src) {
+        if (!src) return alert('Please upload an image first!')
+        dst = new cv.Mat()
+        cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0) // Convert to grayscale
+        cv.threshold(src, dst, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
+        processedImage = dst
+
+        let content = `<div class="item">
+          <h2>Initial Image</h2>
+          <img id="primaryImage" alt="picture" width="140px" height="140px"/>
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+          <h2>Processed Image</h2>
+          <img id="processedImage" alt="picture" width="140px" height="140px"/>
+        </div><br><br>`
+
+        $('#sliderContent').html(content)
+
+        let canvas3 = document.createElement('canvas')
+        cv.imshow(canvas3, processedImage)
+        document.getElementById('processedImage').src = canvas3.toDataURL()
+        document.getElementById('layer5outputImage').src = canvas3.toDataURL()
+
+        let canvas1 = document.createElement('canvas')
+        cv.imshow(canvas1, croppedImage)
+        document.getElementById('primaryImage').src = canvas1.toDataURL()
+
+        // following is only for showing the size
+        var myImage = new Image()
+        myImage.name = $('img', $('#Layer-5')).attr('name')
+        myImage.src = $('img', $('#Layer-5')).attr('src')
+        myImage.onload = function () {
+          $('dims', '#imgInfo').html(this.height + ' x ' + this.width)
+        }
+        dst.delete()
+      }
+
+      function regionGrowing(src,seed,deviation,useLast10Pixels,basedOnVariance) {
+        const dst = new cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC1) // Initialize black image
+        const visited = new cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC1) // Track visited pixels
+        const queue = [seed]
+
+        const criteria = {
+          pixelList: [],
+          update: function (pixel) {
+            this.pixelList.push(pixel)
+            if (this.pixelList.length > 10 && useLast10Pixels) {
+              this.pixelList.shift()
+            }
+          },
+          calculate: function () {
+            if (this.pixelList.length === 0) return 0
+            const pixels = this.pixelList
+            if (basedOnVariance) {
+              const mean = pixels.reduce((sum, p) => sum + p, 0) / pixels.length
+              return (
+                pixels.reduce((sum, p) => sum + Math.pow(p - mean, 2), 0) /
+                pixels.length
+              )
+            } else {
+              return pixels.reduce((sum, p) => sum + p, 0) / pixels.length
+            }
+          },
+        }
+
+        const inBounds = (x, y) =>
+          x >= 0 && x < src.cols && y >= 0 && y < src.rows
+
+        while (queue.length > 0) {
+          const { x, y } = queue.shift()
+          if (!inBounds(x, y) || visited.ucharPtr(y, x)[0] === 255) continue
+
+          visited.ucharPtr(y, x)[0] = 255 // Mark as visited
+          const pixelVal = src.ucharPtr(y, x)[0]
+
+          criteria.update(pixelVal)
+          const threshold = criteria.calculate()
+          if (Math.abs(pixelVal - threshold) <= deviation) {
+            dst.ucharPtr(y, x)[0] = 255 // Mark as segmented (white)
+            queue.push({ x: x + 1, y })
+            queue.push({ x: x - 1, y })
+            queue.push({ x, y: y + 1 })
+            queue.push({ x, y: y - 1 })
+          }
+        }
+
+        processedImage = dst
+
+        let content = `<div class="item">
+          <h2>Initial Image</h2>
+          <img id="primaryImage" alt="picture" width="140px" height="140px"/>
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+          <h2>Processed Image</h2>
+          <img id="processedImage" alt="picture" width="140px" height="140px"/>
+        </div><br><br>`
+
+        $('#sliderContent').html(content)
+
+        let canvas3 = document.createElement('canvas')
+        cv.imshow(canvas3, processedImage)
+        // following is for showing the output image
+        // in the right output panel and below it as well (the slider thing)
+        document.getElementById('processedImage').src = canvas3.toDataURL()
+        document.getElementById('layer5outputImage').src = canvas3.toDataURL()
+
+        let canvas1 = document.createElement('canvas')
+        cv.imshow(canvas1, croppedImage)
+        document.getElementById('primaryImage').src = canvas1.toDataURL()
+
+        // following is only for showing the size
+        var myImage = new Image()
+        myImage.name = $('img', $('#Layer-5')).attr('name')
+        myImage.src = $('img', $('#Layer-5')).attr('src')
+        myImage.onload = function () {
+          $('dims', '#imgInfo').html(this.height + ' x ' + this.width)
+        }
+      }
+
+      function confirmTo(url) {
+        var response = confirm('You will lose Session Data: Continue?')
+        if (response) {
+          window.location.href = url
+        }
+      }
+
+      var exp, assess, id, state, currentS
+
+      var session = {
+        start: function () {
+          exp = 'segment'
+          assess = getQueryVariable('assess')
+          id = getQueryVariable('assess')
+          state = 0
+          currentS = 1
+        },
+      }
+
+      // Function to retrieve query parameters from URL
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1)
+        var vars = query.split('&')
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=')
+          if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1])
+          }
+        }
+        return null
+      }
+
+      function loadImage(url) {
+        return new Promise((resolve, reject) => {
+          let img = new Image()
+          img.crossOrigin = 'Anonymous'
+          img.src = url
+          img.onload = () => {
+            let canvas = document.createElement('canvas')
+            canvas.width = img.width
+            canvas.height = img.height
+            let ctx = canvas.getContext('2d')
+            ctx.drawImage(img, 0, 0)
+            let imgData = ctx.getImageData(0, 0, img.width, img.height)
+            let mat = new cv.Mat(imgData.height, imgData.width, cv.CV_8UC4)
+            mat.data.set(imgData.data)
+            resolve(mat)
+          }
+          img.onerror = (err) => reject(err)
+        })
+      }
+
+      function onOpenCvReady() {
+        // console.log("OpenCV.js is ready.", cv.getBuildInformation);
+
+        $(document).ready(function () {
+          session.start()
+          startx = 18
+          endx = 33
+          turn = 'end'
+          sing = 'yes'
+
+          buttId = 'button1'
+
+          if (exp === 'piping') {
+            set_state(1)
+          } else if (assess) {
+            set_state(1)
+          } else {
+            set_state(0)
+          }
+
+          $('.imageFull').hide()
+          $('#popUp').hide()
+          //   $('#radio').buttonset()
+          //   $('#radio').button('refresh')
+
+          $('button1').each(function () {
+            if (!assess) {
+              $(this).show()
+            }
+          })
+
+          $('button1', '#Layer-2').button()
+          $('button1', '#Layer-2').click(function () {
+            toggleMosaic()
+          })
+
+          $('button2', '#Layer-2').button()
+          $('button2', '#Layer-2').click(function () {
+            doTransform()
+          })
+
+          $('button3').button()
+          $('button3').click(function () {
+            doTransform()
+          })
+
+          $('button4', '#Layer-2').button()
+          $('button4', '#Layer-2').click(function () {
+            if (!assess) {
+              set_state(0)
+            } else {
+              set_state(1)
+            }
+
+            $('dims', '#imgInfo').html('____ x ____ ')
+
+            $('img', $('#Layer-5')).attr('src', 'images/Layer-5.jpg')
+            $('img', $('#Layer-4')).attr(
+              'src',
+              assess
+                ? 'images/assess/' + id + '_' + currentS + '.png'
+                : 'images/Layer-4.jpg'
+            )
+
+            $('#sliderContent').replaceWith(
+              '<div id="sliderContent" class="ui-corner-all">\
+              <div class="viewer ui-corner-all">\
+                  <div class="content-conveyor ui-helper-clearfix">\
+                      <div class="item">\
+                          <h2>' +
+                (assess ? 'Assessment' : 'Start') +
+                '</h2>\
+                          <img src="' +
+                (assess
+                  ? 'images/assess/' + id + '_' + currentS + '.png'
+                  : 'images/Mosaic.png') +
+                '" alt="picture" width="140px" height="140px"/>\
+                          <dl class="details ui-helper-clearfix">\
+                              <dt>' +
+                (assess
+                  ? 'This is the Input Image. Perform Operations to get the above result.'
+                  : 'Select a portion of the Mosaic on the Right and Transform...') +
+                '</dt>\
+                          </dl>\
+                      </div>\
+                  </div>\
+              </div>\
+              <div id="slider"></div>\
+          </div>'
+            )
+          })
+
+          $('button2', '#Layer-2').click(function () {
+            doTransform()
+          })
+
+          $('#Mosaic').imgAreaSelect({
+            handles: true,
+            movable: true,
+            persistent: true,
+            resizable: false,
+            x1: 300,
+            y1: 300,
+            x2: 600,
+            y2: 600,
+            hide: false,
+            imageHeight: 900,
+            imageWidth: 900,
+          })
+          toggleMosaic()
+
+          // Check if 'args' is present in the query parameters
+          const urlParams = new URLSearchParams(window.location.search)
+          const args = urlParams.get('args')
+
+          if (args) {
+            if (args !== 'regn') {
+              const checkBoxes = document.querySelectorAll(
+                "input[name='option1']"
+              )
+
+              checkBoxes.forEach((checkBox) => {
+                if (checkBox.value === args) {
+                  checkBox.click()
+                }
+              })
+            } else {
+              document.getElementById('regionGrowing').click()
+            }
+          }
+
+          // new js
+          var titleText = assess ? 'Assessment' : 'Start'
+          $('#itemTitle').text(titleText)
+
+          var imgSrc = assess
+            ? 'images/assess/' + id + '_' + currentS + '.png'
+            : 'images/Mosaic.png'
+          $('#itemImage').attr('src', imgSrc)
+
+          var descriptionText = assess
+            ? 'This is the Input Image. Perform Operations to get the above result.'
+            : 'Select a portion of the Mosaic on the Right and Transform...'
+          $('#itemDescription').text(descriptionText)
+
+          var imgSrc = ''
+          if (assess) {
+            imgSrc = 'images/assess/' + id + '_' + currentS + '.png'
+          } else {
+            imgSrc = 'images/Layer-4.jpg'
+          }
+
+          $('#layer4Image').attr('src', imgSrc)
+        })
+      }
+
+      Module = {
+        onRuntimeInitialized: onOpenCvReady,
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- This is 'Backgound_bkgnd_center_jpg' -->
+    <div id="Layer-1" class="Backgound_bkgnd_center_jpg">
+      <div id="para_pop"></div>
+
+      <!-- This is 'Mosaic_jpg' -->
+      <div id="Mosaic" class="Mosaic_jpg">
+        <img
+          id="Mosaic-img"
+          src="images/Mosaicsegment.png"
+          width="513"
+          height="513"
+          alt="Mosaic"
+        />
+      </div>
+
+      <!-- This is 'Thumbnails_jpg' -->
+      <div id="Layer-7" class="Thumbnails_jpg">
+        <div id="sliderContent" class="ui-corner-all">
+          <div class="viewer ui-corner-all">
+            <div class="content-conveyor ui-helper-clearfix">
+              <div class="item">
+                <h2 id="itemTitle"></h2>
+                <img
+                  id="itemImage"
+                  src=""
+                  alt="picture"
+                  width="140px"
+                  height="140px"
+                />
+                <dl class="details ui-helper-clearfix">
+                  <dt id="itemDescription"></dt>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- This Is 'outputLayer_jpg' -->
+      <div id="Layer-5" class="outputLayer_jpg">
+        <img
+          src="images/Layer-5.jpg"
+          alt="outputLayer"
+          id="layer5outputImage"
+          width="281px"
+          height="281px"
+        />
+      </div>
+
+      <!-- This is 'InputLayer_jpg' -->
+      <div id="Layer-4" class="InputLayer_jpg">
+        <img
+          id="layer4Image"
+          src=""
+          width="281"
+          height="281"
+          alt="InputLayer"
+        />
+      </div>
+
+      <canvas
+        id="threSelect"
+        style="
+          position: absolute;
+          border: 1px white solid;
+          left: 310px;
+          width: 300px;
+          top: 111px;
+          padding: 5px;
+          height: 300px;
+          image-rendering: -moz-crisp-edges;
+          z-index: 23;
+          display: none;
+          background-color: #444444;
+        "
+      >
+        <br /><br />
+      </canvas>
+      <button3
+        id="button3"
+        style="
+          position: absolute;
+          border: 1px white solid;
+          left: 330px;
+          top: 430px;
+          padding: 5px;
+          image-rendering: -moz-crisp-edges;
+          z-index: 23;
+          display: none;
+          background-color: #444444;
+        "
+        >Proceed</button3
+      >
+
+      <div
+        id="start"
+        style="
+          position: absolute;
+          left: 393px;
+          top: 117px;
+          z-index: 25;
+          display: none;
+        "
+      >
+        <img src="images/column.png" />
+      </div>
+
+      <div
+        id="end"
+        style="
+          position: absolute;
+          left: 463px;
+          top: 117px;
+          z-index: 26;
+          display: none;
+        "
+      >
+        <img src="images/column.png" />
+      </div>
+
+      <div id="seedCont" style="display: none">
+        <div
+          id="start2"
+          class="reGrow"
+          style="
+            position: absolute;
+            left: 393px;
+            top: 192px;
+            z-index: 30;
+            display: none;
+          "
+        >
+          <img src="diff/end2.png" />
+        </div>
+      </div>
+
+      <!-- This is 'TopBar_jpg' -->
+      <div id="Layer-3" class="TopBar_jpg">
+        <!-- <img src="images/Layer-3.jpg" width="894" height="96" alt="TopBar" /> -->
+        <!-- This is 'IIIT' -->
+        <!-- <div id="Layer-6" class="IIIT"  >
+        <img src="images/iiit.png" width="100" height="70" alt="IIIT" class="pngimg" />
+  </div> -->
+
+        <div id="topMenu">
+          <!-- <h1 style="text-align: center;">Virtual Lab for IMAGE PROCESSING</h1>
+<div class="home">
+<a onclick="confirmTo('index.html')">home</a>
+</div> -->
+          <div class="menu">
+            <!-- <ul>
+<li><a href="objective.php?exp=arith" target="_self" >Objective</a>
+</li>
+<li><a href="intro.php?exp=arith" target="_self" >Introduction</a>
+</li>
+<li><a href="theory.php?exp=arith" target="_self" >Theory</a>
+</li>
+<li><a href="procedure.php?exp=arith" target="_self" >Procedure</a>
+</li>
+<li><sel><a href="arith.php" target="_self" >Experiment</a>
+</sel></li>
+<li><a href="#" target="_self" >Assessment</a>
+        <ul>
+          <li><a href="quiz.php?exp=arith">Quiz</a></li>
+          <li><a href="assign.php?exp=arith">Assignment</a></li>
+         </ul>
+</li> -->
+            <!--
+<li><a href="references.php?exp=arith" target="_self" >References</a>
+</li>
+-->
+            <!-- <li><a href="summary.php" target="_blank" >Summary</a>
+</li>
+</ul> -->
+          </div>
+        </div>
+      </div>
+
+      <div id="imgInfo" class="reGrow" style="display: none">
+        <table>
+          <tr>
+            <th width="180">Position</th>
+            <th></th>
+          </tr>
+          <tr class="region">
+            <td id="st">x=60 y=60</td>
+            <th id="mesg" class="ends"></th>
+          </tr>
+        </table>
+      </div>
+
+      <!-- This is 'Parameters_jpg' -->
+      <div id="Layer-2">
+        <h2 style="text-align: center">Image Segmentation</h2>
+        <div id="nextBox"></div>
+
+        <button1 style="display: none">Select Image</button1>
+        <button4>Reset</button4>
+        <button2>Run</button2>
+        <br /><br />
+
+        <div class="Parameters">
+          <h3>
+            &nbsp;<input
+              type="radio"
+              name="choice"
+              onclick="
+			$('#seedCont').hide(); 
+			$('input','#regn').attr('disabled','true');
+			$('.region').hide();
+			$('input','#thres').removeAttr('disabled');
+			
+			
+			"
+              value="1"
+              checked="true"
+            />Histogram Based Segmentation
+          </h3>
+          <div class="Parameter" id="thres" style="margin-left: 10px">
+            <i>Manual Thresholding</i> <br />
+            <input type="radio" name="option1" value="Man1" />Single
+            Threshold<br />
+            <input type="radio" name="option1" value="Man2" />Double
+            Threshold<br />
+            <i>Automatic Threshold</i> <br />
+            <input
+              type="radio"
+              name="option1"
+              class="notMan"
+              value="Auto"
+              checked
+            />Automatic (Otsu)<br />
+          </div>
+
+          <h3>
+            &nbsp;<input
+              type="radio"
+              class="notMan"
+              onclick="
+		$('input','#thres').attr('disabled','true');
+		$('input','#regn').removeAttr('disabled');
+		$('#seedCont').show();
+		$('#regionG').click();
+		
+		"
+              name="choice"
+              id="regionGrowing"
+              value="2"
+            />Region Growing
+          </h3>
+          <div class="Parameter" id="regn" style="margin-left: 10px">
+            <input
+              type="radio"
+              name="option2"
+              id="regionG"
+              disabled
+              value="1"
+              onclick="$('#mean').show();$('#variance').hide();"
+            />Based on Mean<br />
+            <div
+              id="mean"
+              class="region"
+              style="margin-left: 20px; display: none"
+            >
+              <b>Range:</b><br />
+              <input type="radio" name="option3" value="1" checked />All included
+              Pixels<br />
+              <input type="radio" name="option3" value="2" />Last 10
+              included Pixels<br />
+              <b>Deviation:</b>
+              &#177;<input
+                type="text"
+                id="slider-Dev-display"
+                maxlength="10"
+                value="80%"
+                size="4"
+              />
+              <div id="slider-Dev"></div>
+
+              <script type="text/javascript">
+                $(function () {
+                  $('#slider-Dev').slider({
+                    value: 80,
+                    min: 0,
+                    max: 100,
+                    step: 1,
+                    slide: function (event, ui) {
+                      $('#slider-Dev-display').attr('value', ui.value + '%')
+                    },
+                  })
+                })
+              </script>
+            </div>
+
+            <input
+              type="radio"
+              name="option2"
+              disabled
+              value="2"
+              onclick="$('#variance').show();$('#mean').hide();"
+            />Based on Variance<br />
+            <div
+              id="variance"
+              class="region"
+              style="margin-left: 20px; display: none"
+            >
+              <b>Range:</b><br />
+              <input type="radio" name="option4" value="1" />All included
+              Pixels<br />
+              <input type="radio" name="option4" value="2" checked />Last 10
+              included Pixels<br />
+              <b>Deviation:</b>
+              &#177;<input
+                type="text"
+                id="slider-Dev2-display"
+                maxlength="10"
+                value="2%"
+                size="4"
+              />
+              <div id="slider-Dev2"></div>
+
+              <script type="text/javascript">
+                $(function () {
+                  $('#slider-Dev2').slider({
+                    value: 2,
+                    min: 0,
+                    max: 100,
+                    step: 1,
+                    slide: function (event, ui) {
+                      $('#slider-Dev2-display').attr('value', ui.value + '%')
+                    },
+                  })
+                })
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="placeholder"
+          style="margin-left: 20px; width: 220px; height: 220px"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
