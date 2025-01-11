@@ -1,28 +1,30 @@
-The experiment is designed to understand and learn two classes of Image Segmentation methods. This experiment consists of two different segmentation methods:
+The experiment is designed to understand and learn two classes of Image Segmentation methods. This experiment consists of two different segmentation methods:  
 
-a. Histogram based Segmentation methods
-b. Region growing based segmentation method
+a. Histogram-based Segmentation methods  
+b. Region-growing-based Segmentation method  
 
-**Steps to run the experiments**
+**Steps to run the experiments**  
 
-1. Select image from the mosaic using 'select image' option  
-   a. Select region of the image to load it in the input image panel  
-2. Select one option from Histogram based Segmentation and Region growing  
-   b. For Histogram based Segmentation  
-     1. Select one of the options: Manual Threshold or Automatic Threshold
-     2. Manual Thresholding  
-        a. Select Single threshold or Double threshold and press Run  
-        b. Adjust the threshold on the image histogram space and press the Proceed  
-     3. Automatic threshold  
-        a. Press Run  
-   c. For Region growing  
-        a. Select seed point on the image panel and choose one of the following option
-        b. Mean-based  
-           1. Select range for different underlying parameters  
-        c. Variance-based , Select the range  
-           1. Select range for different underlying parameters Select run option to perform the operations3. Output result will be displayed in the output panel  
+1. Select an image from the mosaic using the 'select image' option.  
+2. Select a region of the image to load it into the input image panel.  
+3. Select one option from Histogram-based Segmentation or Region-growing.  
+   - For Histogram-based Segmentation:  
+      1. Select one of the options: Manual Threshold or Automatic Threshold.  
+         - Manual Thresholding:  
+           a. Select Single threshold or Double threshold and press Run.  
+           b. Adjust the threshold on the image histogram space and press Proceed.  
+         - Automatic Threshold:  
+           a. Press Run.  
+   - For Region-growing:  
+      1. Select a seed point on the image panel and choose one of the following options:  
+         - Mean-based:  
+            a. Select the range for different underlying parameters.  
+         -  Variance-based:  
+            a. Select the range for different underlying parameters.  
+      2. Press the Run option to perform the operations.  
+4. The output result will be displayed in the output panel.  
 
-**Interesting Observations**
+**Interesting Observations**  
 
-1. Try using different seed point locations for region growing method  
-2. Compare results obtained from two different thresholding methods, particularly on tiger image.  
+1. Try using different seed point locations for the region-growing method.  
+2. Compare results obtained from two different thresholding methods, particularly on the tiger image.  

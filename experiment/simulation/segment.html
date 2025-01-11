@@ -131,6 +131,7 @@ at http://jquery.com
             $('#nextBox').html(
               'Observe the result and try different operations with different secondary Images.'
             )
+            buttId = 'button4'
             break
           case 3:
             $('#nextBox').html('Select the thresholds from the histograms')
@@ -215,7 +216,7 @@ at http://jquery.com
         }
 
         let basedOnVariance = false
-        let useLast10Pixels= false
+        let useLast10Pixels = false
         let deviation = 0
         if (args != 'Auto' && args != 'Man1 ' && args != 'Man2') {
           if ($('#regionG').attr('checked')) {
@@ -228,7 +229,7 @@ at http://jquery.com
               }
             })
           } else {
-            basedOnVariance=true
+            basedOnVariance = true
             checkBoxes = $('input[name=option4]')
             $.each(checkBoxes, function () {
               if ($(this).attr('checked')) {
@@ -248,29 +249,32 @@ at http://jquery.com
         if (!$('#Mosaic').is(':visible')) {
           if (args === 'Auto') {
             applyOtsuThreshold(croppedImage)
-            set_state(2)
           } else if (args === 'Man2') {
             set_state(3)
             drawHistogram(2)
-            set_state(2)
           } else if (args === 'Man1') {
             set_state(3)
             drawHistogram(1)
-            set_state(2)
           } else {
             const seedPoint = {
               x: Math.floor(croppedImage.cols / 2),
               y: Math.floor(croppedImage.rows / 2),
             }
-            regionGrowing(
-              croppedImage,
-              seedPoint,
-              deviation,
-              useLast10Pixels,
-              basedOnVariance
-            )
+            if(!basedOnVariance){
+              regionGrowing(
+                croppedImage,
+                seedPoint,
+                deviation,
+                useLast10Pixels,
+                basedOnVariance
+              )
+            }else{
+              regionGrowingWithVariance(croppedImage, seedPoint, deviation, useLast10Pixels);
+            }
+
           }
         }
+        set_state(2)
       }
       function toggleHistogramVisibility(visible, flag) {
         const displayStyle = visible ? 'block' : 'none'
@@ -487,7 +491,13 @@ at http://jquery.com
         dst.delete()
       }
 
-      function regionGrowing(src,seed,deviation,useLast10Pixels,basedOnVariance) {
+      function regionGrowing(
+        src,
+        seed,
+        deviation,
+        useLast10Pixels,
+        basedOnVariance
+      ) {
         const dst = new cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC1) // Initialize black image
         const visited = new cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC1) // Track visited pixels
         const queue = [seed]
@@ -569,6 +579,95 @@ at http://jquery.com
         myImage.onload = function () {
           $('dims', '#imgInfo').html(this.height + ' x ' + this.width)
         }
+      }
+
+      function regionGrowingWithVariance(img, seedPoint, deviation, range) {
+        const result = cv.Mat.zeros(img.rows, img.cols, cv.CV_8UC1)
+        const visited = new Set()
+        const queue = []
+        const regionPixels = []
+
+        const seedValue = img.ucharAt(seedPoint.y, seedPoint.x)
+        queue.push(seedPoint)
+        visited.add(`${seedPoint.x},${seedPoint.y}`)
+        regionPixels.push(seedValue)
+
+        while (queue.length > 0) {
+          const point = queue.shift()
+          const x = point.x
+          const y = point.y
+
+          result.ucharPtr(y, x)[0] = 255 // Mark pixel as part of the region
+
+          const neighbors = [
+            { x: x + 1, y },
+            { x: x - 1, y },
+            { x, y: y + 1 },
+            { x, y: y - 1 },
+          ]
+
+          neighbors.forEach((neighbor) => {
+            if (
+              neighbor.x >= 0 &&
+              neighbor.x < img.cols &&
+              neighbor.y >= 0 &&
+              neighbor.y < img.rows &&
+              !visited.has(`${neighbor.x},${neighbor.y}`)
+            ) {
+              visited.add(`${neighbor.x},${neighbor.y}`)
+              const pixelValue = img.ucharAt(neighbor.y, neighbor.x)
+
+              const relevantPixels =
+                range === true ? regionPixels.slice(-10) : regionPixels
+              const mean =
+                relevantPixels.reduce((a, b) => a + b, 0) /
+                relevantPixels.length
+              const variance =
+                relevantPixels.reduce((a, b) => a + Math.pow(b - mean, 2), 0) /
+                relevantPixels.length
+
+              if (Math.abs(pixelValue - mean) <= (deviation / 100) * 255) {
+                queue.push(neighbor)
+                regionPixels.push(pixelValue)
+              }
+            }
+          })
+        }
+        processedImage = result
+
+        let content = `<div class="item">
+          <h2>Initial Image</h2>
+          <img id="primaryImage" alt="picture" width="140px" height="140px"/>
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+          <h2>Processed Image</h2>
+          <img id="processedImage" alt="picture" width="140px" height="140px"/>
+        </div><br><br>`
+
+        $('#sliderContent').html(content)
+
+        let canvas3 = document.createElement('canvas')
+        cv.imshow(canvas3, processedImage)
+        // following is for showing the output image
+        // in the right output panel and below it as well (the slider thing)
+        document.getElementById('processedImage').src = canvas3.toDataURL()
+        document.getElementById('layer5outputImage').src = canvas3.toDataURL()
+
+        let canvas1 = document.createElement('canvas')
+        cv.imshow(canvas1, croppedImage)
+        document.getElementById('primaryImage').src = canvas1.toDataURL()
+
+        // following is only for showing the size
+        var myImage = new Image()
+        myImage.name = $('img', $('#Layer-5')).attr('name')
+        myImage.src = $('img', $('#Layer-5')).attr('src')
+        myImage.onload = function () {
+          $('dims', '#imgInfo').html(this.height + ' x ' + this.width)
+        }
+
+        // return result
       }
 
       function confirmTo(url) {
@@ -1051,10 +1150,10 @@ at http://jquery.com
               style="margin-left: 20px; display: none"
             >
               <b>Range:</b><br />
-              <input type="radio" name="option3" value="1" checked />All included
-              Pixels<br />
-              <input type="radio" name="option3" value="2" />Last 10
+              <input type="radio" name="option3" value="1" checked />All
               included Pixels<br />
+              <input type="radio" name="option3" value="2" />Last 10 included
+              Pixels<br />
               <b>Deviation:</b>
               &#177;<input
                 type="text"
