@@ -57,6 +57,7 @@ and N= [0, 255] is the range of intensity values. The value of T from the range 
 
 <img src="images/image009.gif" style="margin-left:400px;">
 <p style='margin-left:405px; font-size: 20px; align-items:center'>
+
 Figure 5: Output result using OTSU threshold.
 </p>
 
