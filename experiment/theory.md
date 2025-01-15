@@ -24,8 +24,8 @@ Here, two threshold values are chosen instead of one. Let T1 > T2 be the two thr
 
 <img src="images/image004.gif" style="margin-left:400px;">
 
-<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 4: Output of double threshold operation. 
-1. at T1= 120 and T2= 145 
+<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 4: Output of double threshold operation. <br>
+1. at T1= 120 and T2= 145 <br>
 2. at T1= 150 and T2= 175.
 </p>
 
@@ -37,9 +37,12 @@ The OTSU threshold is the most standard threshold technique used in image proces
 
 The within-class variance is defined as:
 
+<p style="margin-left:405px; font-size: 30px; align-items:center">
 σ<sup>2</sup><sub>within</sub> = n<sub>B</sub>(T) ⋅ σ<sup>2</sup><sub>B</sub>(T) + n<sub>F</sub>(T) ⋅ σ<sup>2</sup><sub>F</sub>(T)
+</p>
 
-**Where:**
+<div style="margin-left:405px; font-size: 20px; align-items:center">
+Where:
 
 n<sub>B</sub>(T) = ∑<sub>i=0</sub><sup>T-1</sup> p(i)  
 n<sub>F</sub>(T) = ∑<sub>i=T</sub><sup>N-1</sup> p(i)  
@@ -48,10 +51,13 @@ n<sub>F</sub>(T) = ∑<sub>i=T</sub><sup>N-1</sup> p(i)
 σ<sup>2</sup><sub>F</sub>(T) = The variance of the pixels in the foreground (above threshold T)
 
 
-and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels. Figure 5 shows the output value obtained using OTSU method.
+and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels. 
+</div>
 
-<img src="images/image009.gif" style="margin-left:500px;">
-<p style='margin-left:505px; font-size: 20px; align-items:center'>
+
+<img src="images/image009.gif" style="margin-left:400px;">
+<p style='margin-left:405px; font-size: 20px; align-items:center'>
+
 Figure 5: Output result using OTSU threshold.
 </p>
 
@@ -75,9 +81,9 @@ Let P(x,y) be the given seed pixel inside an object in the image. The objective 
 
 The final locations in the set S gives the pixels belonging to the object/region of interest. The inclusion of new location to the set S depends on the similarity criteria used for the comparison. There are two standard criteria used:
 
-a) Based on mean value: If the intensity value at the current location is within a predefined range of the mean value of the set S, it is considered similar and included.
+a. Based on mean value: If the intensity value at the current location is within a predefined range of the mean value of the set S, it is considered similar and included.
 
-b) Based on variance-: If inclusion of the current location does not change the variance of set S by some predefined range then it is considered similar and included.
+b. Based on variance-: If inclusion of the current location does not change the variance of set S by some predefined range then it is considered similar and included.
 
 The range selection in (a) and (b) is typically manual and based on the image and underlying object of interest. Figure 6 shows the results of using the mean as criterion for region growing with different seed points for Figure 3.
 
