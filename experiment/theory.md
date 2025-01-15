@@ -37,11 +37,11 @@ The OTSU threshold is the most standard threshold technique used in image proces
 
 The within-class variance is defined as:
 
-<p style="margin-left:405px; font-size: 30px; align-items:center">
+<p style="margin-left:380px; font-size: 30px; align-items:center">
 σ<sup>2</sup><sub>within</sub> = n<sub>B</sub>(T) ⋅ σ<sup>2</sup><sub>B</sub>(T) + n<sub>F</sub>(T) ⋅ σ<sup>2</sup><sub>F</sub>(T)
 </p>
 
-<div style="margin-left:405px; font-size: 20px; align-items:center">
+<div style="margin-left:380px; font-size: 20px; align-items:center">
 Where:
 
 n<sub>B</sub>(T) = ∑<sub>i=0</sub><sup>T-1</sup> p(i)  
@@ -52,14 +52,11 @@ n<sub>F</sub>(T) = ∑<sub>i=T</sub><sup>N-1</sup> p(i)
 
 
 and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels. 
-</div>
+</div><br>
 
 
 <img src="images/image009.gif" style="margin-left:400px;">
-<p style='margin-left:405px; font-size: 20px; align-items:center'>
-
-Figure 5: Output result using OTSU threshold.
-</p>
+<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 5: Output result using OTSU threshold.</p>
 
 **Region Growing**
 
