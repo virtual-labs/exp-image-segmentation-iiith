@@ -1,16 +1,16 @@
-When the object(s) of interest in an image are clearly differentiated from the background in terms of brightness, then the image histogram can help in characterizing the foreground and background pixels. Fig.1 shows the histogram representing foreground and background regions of such an image. By selecting an appropriate gray-value point on the x-axis as a threshold, all pixels with value below the threshold can be considered to belong to the foreground and all those above belong to the background (and vice versa). This process is known as thresholding. There are many ways to threshold an image subject to the task in hand. In this experiment, few basic techniques of obtaining pixels of interest are explained.
+When the object(s) of interest in an image are clearly differentiated from the background in terms of brightness, then the image histogram can help in characterizing the foreground and background pixels. Figure 1 shows the histogram representing foreground and background regions of such an image. By selecting an appropriate gray-value point on the x-axis as a threshold, all pixels with value below the threshold can be considered to belong to the foreground and all those above belong to the background (and vice versa). This process is known as thresholding. There are many ways to threshold an image subject to the task in hand. In this experiment, few basic techniques of obtaining pixels of interest are explained.
 
-<img src="images/image001.gif">
+<img src="images/image001.gif" style="margin-left:500px;">
 
-Figure 1 Histogram representation of the image.
+<p style='margin-left:505px; font-size: 15px; align-items:center'>Figure 1 Histogram representation of the image.</p>
 
 **Single Threshold**
 
 Let I(x,y) be the intensity value at pixel location (x,y) and T is the threshold value. The segmentation is done as follows. If I(x,y) >= T then it is labeled 1 in the output image otherwise it is labeled as 0. The pixel value corresponding to 1 and 0 depends on the application. For instance, Figure 2 shows a fingerprint image. By selecting a threshold value T=120 yields an output where 1 is set to white or pixel value of 255. Thus, in this case, the white pixels are background and black pixels are of the object of interest (fingerprint) or the foreground.
 
-<img src="images/image002.gif">
+<img src="images/image002.gif" style="margin-left:400px;">
 
-Figure 2: The binary output image as a result of single threshold with a value of 120.
+<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 2: The binary output image as a result of single threshold with a value of 120.</p>
 
 The single threshold approach is suitable when the image have a bi-modal histogram which means histogram has two distinct peaks. However, in many situations an object of interest has some variation in brightness value in which case a double threshold might be necessary.
 
@@ -18,38 +18,45 @@ The single threshold approach is suitable when the image have a bi-modal histogr
 
 Here, two threshold values are chosen instead of one. Let T1 > T2 be the two threshold values . If I(x,y) > T1 and I(x,y) <=T2 then pixel (x.y) in the output image is labeled 1 and 0 otherwise. Consider the image in Figure 3 with two objects. Figure 4 shows the output obtained at different threshold settings. Note how this results in extraction of different objects in the image. The selection of threshold is usually manual and depends on the image content.
 
-<img src="images/image003.gif">
+<img src="images/image003.gif" style="margin-left:500px;">
 
-Figure 3: Input image with multiple objects having different gray-scale values
+<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 3: Input image with multiple objects having different gray-scale values</p>
 
-<img src="images/image004.gif">
+<img src="images/image004.gif" style="margin-left:400px;">
 
-Figure 4: Output of double threshold operation. A) at T1= 120 and T2= 145, and B) at T1= 150 and T2= 175.
+<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 4: Output of double threshold operation. <br>
+1. at T1= 120 and T2= 145 <br>
+2. at T1= 150 and T2= 175.
+</p>
 
 **Automatic Threshold (OTSU threshold)**
 
 The manual selection of threshold is not desirable or feasible in many applications. There are many different techniques to select threshold value automatically by analyzing image histogram.
 
-The Otsu threshold is the most standard threshold technique used in image processing application. It assumes that the image having bi-model histogram. In other words, the foreground and background pixels have distinct intensity range in the image. It is based on the simple idea of finding the threshold that minimizes the weighted within-class variance where foreground and background are two different classes (categories need to be separated).
+The OTSU threshold is the most standard threshold technique used in image processing application. It assumes that the image having bi-model histogram. In other words, the foreground and background pixels have distinct intensity range in the image. It is based on the simple idea of finding the threshold that minimizes the weighted within-class variance where foreground and background are two different classes (categories need to be separated).
 
 The within-class variance is defined as:
 
-<img src="images/image005.gif">  
- 
-Where,
+<p style="margin-left:380px; font-size: 30px; align-items:center">
+σ<sup>2</sup><sub>within</sub> = n<sub>B</sub>(T) ⋅ σ<sup>2</sup><sub>B</sub>(T) + n<sub>F</sub>(T) ⋅ σ<sup>2</sup><sub>F</sub>(T)
+</p>
 
-	
-<img src="images/image007.gif"> <img src="images/image006.gif">
- 
+<div style="margin-left:380px; font-size: 20px; align-items:center">
+Where:
 
-<img src="images/image008.gif">
- 
+n<sub>B</sub>(T) = ∑<sub>i=0</sub><sup>T-1</sup> p(i)  
+n<sub>F</sub>(T) = ∑<sub>i=T</sub><sup>N-1</sup> p(i)  
 
-and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels. Figure 5 shows the output value obtained using Otsu method.
+σ<sup>2</sup><sub>B</sub>(T) = The variance of the pixels in the background (below threshold T)  
+σ<sup>2</sup><sub>F</sub>(T) = The variance of the pixels in the foreground (above threshold T)
 
-<img src="images/image009.gif">
 
-Figure 5: Output result using Otsu threshold.
+and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels. 
+</div><br>
+
+
+<img src="images/image009.gif" style="margin-left:400px;">
+<p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 5: Output result using OTSU threshold.</p>
 
 **Region Growing**
 
@@ -57,11 +64,11 @@ In the most general case, an image histogram may not be bi-modal. However, the o
 
 Let P(x,y) be the given seed pixel inside an object in the image. The objective is to get the locations of all pixels belonging to the object. Let S be a set of locations of pixels. Initially S will have only one member, namely, (x,y).
 
-1. Get neighbors (xN, yN) of pixel P(x,y) and include it in the set S
+1. Get neighbors (x<sub>N</sub>, y<sub>N</sub>) of pixel P(x,y) and include it in the set S
 
-2. Evaluate the pixel value P(xN, yN) by comparing it with P(x,y)
+2. Evaluate the pixel value P(x<sub>N</sub>, y<sub>N</sub>) by comparing it with P(x,y)
 
-    a. If found similar then include (xN, yN) in set S
+    a. If found similar then include (x<sub>N</sub>, y<sub>N</sub>) in set S
 
     b. Otherwise discard location
 
@@ -71,16 +78,16 @@ Let P(x,y) be the given seed pixel inside an object in the image. The objective 
 
 The final locations in the set S gives the pixels belonging to the object/region of interest. The inclusion of new location to the set S depends on the similarity criteria used for the comparison. There are two standard criteria used:
 
-a) Based on mean value: If the intensity value at the current location is within a predefined range of the mean value of the set S, it is considered similar and included.
+a. Based on mean value: If the intensity value at the current location is within a predefined range of the mean value of the set S, it is considered similar and included.
 
-b) Based on variance-: If inclusion of the current location does not change the variance of set S by some predefined range then it is considered similar and included.
+b. Based on variance-: If inclusion of the current location does not change the variance of set S by some predefined range then it is considered similar and included.
 
 The range selection in (a) and (b) is typically manual and based on the image and underlying object of interest. Figure 6 shows the results of using the mean as criterion for region growing with different seed points for Figure 3.
 
-<img src="images/image010.gif">
-
-Figure 6: Region growing outputs obtained with different seed point inputs on the image given in Fig 3.
-
+<img src="images/image010.gif" style="margin-left:400px;">
+<p style='margin-left:390px; font-size: 15px; align-items:center'>
+Figure 6: Region growing outputs obtained with different seed point inputs on the image given in Figure 3.
+</p>
 In this simple example, this method works well. In the course of the experiment, you will find that the location of the seed, the similarity criterion and the range have significant impact on the success of the segmentation.
 
  
