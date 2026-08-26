@@ -1,3 +1,7 @@
+Image segmentation is a common task which arises in many situations such as extracting a face or a character in a text from an image before performing automatic recognition. Generally, it is used to separate the foreground pixels belonging to the object(s) of interest, from the background pixels. Segmentation aims to partition a given image into a set of regions having following properties: connectivity and homogeneity in terms of color or texture.
+
+An object or region can be a characterized using multiple low-level features such as brightness, colour, texture, etc. In this experiment, we will restrict ourselves to objects defined by brightness. We will aim to partition a given image into two (foreground and background) and study two techniques namely, histogram-based thresholding and region growing, to perform this partitioning.
+
 When the object(s) of interest in an image are clearly differentiated from the background in terms of brightness, then the image histogram can help in characterizing the foreground and background pixels. Figure 1 shows the histogram representing foreground and background regions of such an image. By selecting an appropriate gray-value point on the x-axis as a threshold, all pixels with value below the threshold can be considered to belong to the foreground and all those above belong to the background (and vice versa). This process is known as thresholding. There are many ways to threshold an image subject to the task in hand. In this experiment, few basic techniques of obtaining pixels of interest are explained.
 
 <img src="images/image001.gif" style="margin-left:500px;">
@@ -45,15 +49,14 @@ The within-class variance is defined as:
 Where:
 
 n<sub>B</sub>(T) = ∑<sub>i=0</sub><sup>T-1</sup> p(i)  
-n<sub>F</sub>(T) = ∑<sub>i=T</sub><sup>N-1</sup> p(i)  
+n<sub>F</sub>(T) = ∑<sub>i=T</sub><sup>N-1</sup> p(i)
 
 σ<sup>2</sup><sub>B</sub>(T) = The variance of the pixels in the background (below threshold T)  
 σ<sup>2</sup><sub>F</sub>(T) = The variance of the pixels in the foreground (above threshold T)
 
+and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels.
 
-and N= [0, 255] is the range of intensity values. The value of T from the range from [0-255] which minimizes the within-class variance is chosen and applied to get the foreground pixels. 
 </div><br>
-
 
 <img src="images/image009.gif" style="margin-left:400px;">
 <p style='margin-left:405px; font-size: 15px; align-items:center'>Figure 5: Output result using OTSU threshold.</p>
@@ -68,9 +71,9 @@ Let P(x,y) be the given seed pixel inside an object in the image. The objective 
 
 2. Evaluate the pixel value P(x<sub>N</sub>, y<sub>N</sub>) by comparing it with P(x,y)
 
-    a. If found similar then include (x<sub>N</sub>, y<sub>N</sub>) in set S
+   a. If found similar then include (x<sub>N</sub>, y<sub>N</sub>) in set S
 
-    b. Otherwise discard location
+   b. Otherwise discard location
 
 3. Repeat step-1 for newly included locations in the set S
 
@@ -89,5 +92,3 @@ The range selection in (a) and (b) is typically manual and based on the image an
 Figure 6: Region growing outputs obtained with different seed point inputs on the image given in Figure 3.
 </p>
 In this simple example, this method works well. In the course of the experiment, you will find that the location of the seed, the similarity criterion and the range have significant impact on the success of the segmentation.
-
- 
