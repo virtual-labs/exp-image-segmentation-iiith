@@ -1,0 +1,158 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. What is the main purpose of image segmentation in this experiment?",
+      "answers": {
+        "a": "To separate foreground pixels belonging to objects of interest from the background",
+        "b": "To change the image file format",
+        "c": "To increase the number of pixels in the image",
+        "d": "To rotate the image"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. Image segmentation is used to separate foreground pixels belonging to the object or objects of interest from the background.",
+        "b": "Incorrect. File format conversion does not partition an image into regions.",
+        "c": "Incorrect. Increasing the number of pixels changes image size rather than separating image regions.",
+        "d": "Incorrect. Rotation changes spatial arrangement and does not perform segmentation."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. Which property is used to characterize the objects considered in this Image Segmentation experiment?",
+      "answers": {
+        "a": "Texture only",
+        "b": "Brightness",
+        "c": "Image file size",
+        "d": "Pixel coordinates only"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Texture is mentioned as a possible low-level feature, but this experiment restricts the objects considered to brightness.",
+        "b": "Correct. In this experiment, objects are defined by their brightness or intensity values.",
+        "c": "Incorrect. File size is not used as an image feature for the segmentation methods studied here.",
+        "d": "Incorrect. Pixel coordinates identify locations but do not by themselves characterize the object feature used in this experiment."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. Which segmentation techniques are studied in this experiment?",
+      "answers": {
+        "a": "Fourier filtering and histogram equalization",
+        "b": "Morphological opening and closing",
+        "c": "Histogram-based thresholding and region growing",
+        "d": "Image arithmetic and point transformation"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. These techniques are not the two segmentation methods studied in this experiment.",
+        "b": "Incorrect. These are morphological operations rather than the two segmentation techniques studied here.",
+        "c": "Correct. The experiment studies histogram-based thresholding and region growing for partitioning an image into foreground and background.",
+        "d": "Incorrect. These are different image-processing operations and are not the two segmentation techniques studied here."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. For a single-threshold segmentation with threshold $T$, which condition labels a pixel with intensity $I(x,y)$ as $1$?",
+      "answers": {
+        "a": "$I(x,y) < T$",
+        "b": "$I(x,y) = 0$",
+        "c": "$I(x,y) \\ne T$",
+        "d": "$I(x,y) \\geq T$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. This condition does not match the single-threshold rule specified in the experiment.",
+        "b": "Incorrect. The thresholding rule does not label a pixel according only to whether its intensity is zero.",
+        "c": "Incorrect. The thresholding rule is based on a specific comparison with $T$, not simply on inequality with $T$.",
+        "d": "Correct. The experiment defines the single-threshold output so that $I(x,y) \\geq T$ is labeled $1$ and the remaining pixels are labeled $0$."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. A single-threshold approach is most suitable when the image histogram has which characteristic?",
+      "answers": {
+        "a": "A bi-modal distribution with two distinct peaks",
+        "b": "No variation in intensity values",
+        "c": "Only one pixel in the image",
+        "d": "A distribution that is independent of image brightness"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The experiment states that single thresholding is suitable when the histogram is bi-modal, with two distinct peaks.",
+        "b": "Incorrect. A histogram with no variation does not provide the two distinct intensity groups described for this approach.",
+        "c": "Incorrect. The suitability of thresholding is determined by the intensity distribution, not by having only one pixel.",
+        "d": "Incorrect. Threshold selection in this experiment is based on image intensity information."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. Why can a double threshold be useful when an object of interest has variation in brightness?",
+      "answers": {
+        "a": "It removes the need to examine image intensity values",
+        "b": "It allows a range of intensity values to be selected for the object of interest",
+        "c": "It always produces the same segmentation regardless of threshold values",
+        "d": "It changes the spatial resolution of the image"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Double thresholding still depends on the intensity values and the selected thresholds.",
+        "b": "Correct. Using two threshold values allows an intensity interval to be selected, which can help when the object has some variation in brightness.",
+        "c": "Incorrect. The experiment shows that different threshold settings can produce different extracted objects.",
+        "d": "Incorrect. Threshold selection changes pixel labeling rather than the spatial resolution of the image."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. In OTSU thresholding, what quantity is minimized to select the threshold?",
+      "answers": {
+        "a": "The number of image pixels",
+        "b": "The image width",
+        "c": "The weighted within-class variance",
+        "d": "The spatial distance between pixels"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. The number of pixels is used in the calculation but is not the quantity that OTSU minimizes.",
+        "b": "Incorrect. Image width is not the criterion used to select the OTSU threshold.",
+        "c": "Correct. OTSU selects the threshold that minimizes the weighted within-class variance of the foreground and background classes.",
+        "d": "Incorrect. Spatial distance between pixels is not the optimization criterion described for OTSU thresholding."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "8. In region growing, what is the role of the seed pixel?",
+      "answers": {
+        "a": "It determines the image file format",
+        "b": "It is the starting point from which similar pixels are accumulated into the region",
+        "c": "It automatically determines the histogram threshold",
+        "d": "It changes every pixel to the same intensity"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. The seed pixel is used in the segmentation process rather than in file-format selection.",
+        "b": "Correct. Region growing starts with a seed pixel inside an object and accumulates neighboring pixels that satisfy the selected homogeneity criterion.",
+        "c": "Incorrect. The seed pixel is not used to calculate the automatic histogram threshold in this experiment.",
+        "d": "Incorrect. Region growing selects pixels according to a similarity criterion rather than assigning one intensity to the entire image."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "9. Which factors are stated in the experiment to have a significant impact on the success of region growing?",
+      "answers": {
+        "a": "Only the image file format",
+        "b": "Only the image dimensions",
+        "c": "Only the number of pixels",
+        "d": "The seed location, similarity criterion, and selected range"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. File format is not identified as a factor controlling the success of region growing.",
+        "b": "Incorrect. Image dimensions alone are not identified as the determining factors for successful region growing.",
+        "c": "Incorrect. The number of pixels alone does not describe the factors identified in the experiment.",
+        "d": "Correct. The experiment states that the seed location, similarity criterion, and range have significant impact on the success of region growing."
+      },
+      "difficulty": "advanced"
+    }
+  ]
+}

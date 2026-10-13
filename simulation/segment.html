@@ -1,0 +1,1429 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Segmentation Simulation</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        --bg: #f3f5f8;
+        --panel: #ffffff;
+        --border: #d4d9e0;
+        --accent: #1f6feb;
+        --muted: #5d6470;
+        --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: var(--bg);
+        color: #1f2937;
+      }
+
+      .app {
+        max-width: 1200px;
+        margin: 28px auto;
+        padding: 20px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 16px 20px;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: #f8fafc;
+        color: #111827;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      button.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-columns: 1.3fr 0.8fr 0.8fr;
+        gap: 18px;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        border-radius: 12px;
+        padding: 14px;
+        min-height: 260px;
+      }
+
+      .panel h3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        margin: 0 0 12px;
+        font-size: 1.1rem;
+      }
+
+      .dims {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .mosaic-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #293541;
+        overflow: hidden;
+        touch-action: none;
+      }
+
+      #Mosaic {
+        position: relative;
+      }
+
+      #Mosaic-img {
+        position: relative;
+        z-index: 1;
+        display: block;
+        max-width: 100%;
+        max-height: 420px;
+        border-radius: 8px;
+        user-select: none;
+        -webkit-user-drag: none;
+        touch-action: none;
+      }
+
+      .selection-overlay {
+        position: absolute;
+        border: 2px solid #3b82f6;
+        background: rgba(59, 130, 246, 0.18);
+        pointer-events: none;
+        display: none;
+        z-index: 20;
+      }
+
+      .image-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 240px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: linear-gradient(180deg, #f8fafc, #eef2f7);
+        overflow: hidden;
+      }
+
+      .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: inherit;
+      }
+
+      .controls {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 16px 18px;
+      }
+
+      .group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .group h3 {
+        margin: 0 0 6px;
+      }
+
+      .group label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+      }
+
+      .inline-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 18px;
+      }
+
+      fieldset {
+        margin: 0;
+        padding: 10px 12px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+
+      legend {
+        padding: 0 6px;
+        font-weight: 600;
+      }
+
+      .slider-row {
+        display: grid;
+        grid-template-columns: 9.5rem 1fr 4.5rem;
+        align-items: center;
+        gap: 10px;
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      .slider-row input[type="range"] {
+        width: 100%;
+      }
+
+      .slider-row input[type="number"] {
+        width: 100%;
+        padding: 4px 6px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font: inherit;
+      }
+
+      .hint {
+        margin: 6px 0 0;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .equation {
+        margin: 4px 0 0;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.9rem;
+        overflow-wrap: anywhere;
+      }
+
+      .option-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .sub-options {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 16px;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hist-canvas {
+        display: block;
+        width: 100%;
+        max-width: 420px;
+        height: 170px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: start;
+        gap: 4px 16px;
+        margin: 6px 0 0;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .stats div {
+        display: contents;
+      }
+
+      .stats dt {
+        font-weight: 600;
+      }
+
+      .stats dd {
+        margin: 0;
+      }
+
+      .image-box {
+        position: relative;
+      }
+
+      #layer4Image.seed-mode {
+        cursor: crosshair;
+      }
+
+      .seed-marker {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        margin: -9px 0 0 -9px;
+        border: 2px solid #ea580c;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+        pointer-events: none;
+      }
+
+      .steps {
+        margin-top: 18px;
+      }
+
+      .steps-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .steps-grid figure {
+        margin: 0;
+        width: 150px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .steps-grid img {
+        display: block;
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #eef2f7;
+      }
+
+      .status {
+        margin-top: 16px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+
+      @media (max-width: 900px) {
+        .app {
+          margin: 0 auto;
+          padding: 16px;
+        }
+
+        .topbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .workspace,
+        .controls {
+          grid-template-columns: 1fr;
+        }
+
+        .slider-row {
+          grid-template-columns: 1fr 4.5rem;
+        }
+
+        .slider-row > span {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app">
+      <div class="topbar">
+        <div class="toolbar">
+          <button id="button1" type="button">Select Image</button>
+          <button id="button4" type="button">Reset</button>
+          <button id="button2" type="button" class="primary">Run</button>
+        </div>
+        <div id="status" class="status">OpenCV is being initialized…</div>
+      </div>
+
+      <div class="workspace">
+        <div id="Mosaic" class="panel">
+          <h3>Mosaic</h3>
+          <div class="mosaic-wrap">
+            <img
+              id="Mosaic-img"
+              src="images/Mosaicsegment.png"
+              alt="Mosaic"
+              draggable="false"
+            />
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Input Image <span id="inputDims" class="dims">— × —</span></h3>
+          <div class="image-box">
+            <img id="layer4Image" src="images/Layer-4.jpg" alt="Selected input" />
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>
+            Segmented Output <span id="outputDims" class="dims">— × —</span>
+          </h3>
+          <div class="image-box">
+            <img id="layer5outputImage" src="images/Layer-5.jpg" alt="Output" />
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="group">
+          <h3>Segmentation Method</h3>
+          <fieldset>
+            <legend>Histogram-based segmentation</legend>
+            <div class="option-list">
+              <label
+                ><input type="radio" name="method" value="single" checked />
+                Single threshold</label
+              >
+              <label
+                ><input type="radio" name="method" value="double" /> Double
+                threshold</label
+              >
+              <label
+                ><input type="radio" name="method" value="otsu" /> Automatic
+                threshold (Otsu)</label
+              >
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Region-based segmentation</legend>
+            <label
+              ><input type="radio" name="method" value="region" /> Region
+              growing</label
+            >
+          </fieldset>
+
+          <fieldset id="singleGroup" data-methods="single">
+            <legend>Threshold</legend>
+            <div class="slider-row">
+              <span>T</span>
+              <input id="t" type="range" min="0" max="255" step="1" value="128" />
+              <input id="tValue" type="number" min="0" max="255" step="1" value="128" aria-label="Threshold T" />
+            </div>
+          </fieldset>
+
+          <fieldset id="doubleGroup" data-methods="double" hidden>
+            <legend>Thresholds</legend>
+            <div class="slider-row">
+              <span>T1 (lower)</span>
+              <input id="t1" type="range" min="0" max="255" step="1" value="64" />
+              <input id="t1Value" type="number" min="0" max="255" step="1" value="64" aria-label="Lower threshold T1" />
+            </div>
+            <div class="slider-row">
+              <span>T2 (upper)</span>
+              <input id="t2" type="range" min="0" max="255" step="1" value="192" />
+              <input id="t2Value" type="number" min="0" max="255" step="1" value="192" aria-label="Upper threshold T2" />
+            </div>
+          </fieldset>
+
+          <fieldset id="regionGroup" data-methods="region" hidden>
+            <legend>Region growing</legend>
+            <p id="seedText" class="hint"></p>
+            <div class="option-list">
+              <label
+                ><input type="radio" name="criterion" value="mean" checked />
+                <span>Mean-based: |I − μ<sub>S</sub>| ≤ Δ</span></label
+              >
+              <label
+                ><input type="radio" name="criterion" value="variance" />
+                <span>Variance-based: σ<sub>S∪{I}</sub> ≤ σ<sub>max</sub></span></label
+              >
+            </div>
+            <div id="deltaRow" class="slider-row">
+              <span>Δ (intensity)</span>
+              <input id="delta" type="range" min="0" max="100" step="1" value="20" />
+              <input id="deltaValue" type="number" min="0" max="100" step="1" value="20" aria-label="Permitted intensity difference" />
+            </div>
+            <div id="sigmaRow" class="slider-row" hidden>
+              <span>σ<sub>max</sub></span>
+              <input id="sigma" type="range" min="0" max="50" step="1" value="10" />
+              <input id="sigmaValue" type="number" min="0" max="50" step="1" value="10" aria-label="Maximum region standard deviation" />
+            </div>
+            <div class="sub-options">
+              <span>Statistics from:</span>
+              <label><input type="radio" name="statsOver" value="all" checked /> all region pixels</label>
+              <label><input type="radio" name="statsOver" value="last10" /> last 10 added</label>
+            </div>
+            <div class="sub-options">
+              <span>Neighbours:</span>
+              <label><input type="radio" name="connectivity" value="4" checked /> 4-connected</label>
+              <label><input type="radio" name="connectivity" value="8" /> 8-connected</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="group">
+          <h3>Histogram and Rule</h3>
+          <canvas
+            id="segHist"
+            class="hist-canvas"
+            role="img"
+            aria-label="Input histogram with thresholds"
+          ></canvas>
+          <p id="histHint" class="hint"></p>
+          <p id="ruleText" class="equation"></p>
+          <dl id="segInfo" class="stats"></dl>
+        </div>
+      </div>
+
+      <div class="panel steps">
+        <h3>Intermediate Results</h3>
+        <div id="stepsGrid" class="steps-grid">
+          <p class="hint">Run a segmentation to see the results here.</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/opencv.js"></script>
+    <script type="text/javascript">
+      const app = {
+        mosaicMat: null,
+        inputGray: null,
+        processedImage: null,
+        selection: null,
+        dragging: false,
+        startPoint: null,
+        currentPoint: null,
+      };
+
+      const mosaic = document.getElementById("Mosaic");
+      const mosaicWrap = document.querySelector(".mosaic-wrap");
+      const mosaicImg = document.getElementById("Mosaic-img");
+      const inputImg = document.getElementById("layer4Image");
+      const outputImg = document.getElementById("layer5outputImage");
+      const statusEl = document.getElementById("status");
+      const selectionOverlay = document.createElement("div");
+      selectionOverlay.className = "selection-overlay";
+      mosaicWrap.appendChild(selectionOverlay);
+
+      function safeDelete(mat) {
+        if (mat && typeof mat.delete === "function" && !mat.isDeleted()) {
+          mat.delete();
+        }
+      }
+
+      function setStatus(message, isError) {
+        statusEl.textContent = message;
+        statusEl.style.background = isError ? "#fef2f2" : "#eff6ff";
+        statusEl.style.color = isError ? "#b91c1c" : "#1d4ed8";
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+
+      /* ---------- Mosaic selection (native pointer / touch events) ---------- */
+
+      function placeSelectionOverlay(displayX, displayY, displayW, displayH) {
+        const wrapRect = mosaicWrap.getBoundingClientRect();
+        const imageRect = mosaicImg.getBoundingClientRect();
+        const offsetX = imageRect.left - wrapRect.left;
+        const offsetY = imageRect.top - wrapRect.top;
+
+        selectionOverlay.style.left = offsetX + displayX + "px";
+        selectionOverlay.style.top = offsetY + displayY + "px";
+        selectionOverlay.style.width = displayW + "px";
+        selectionOverlay.style.height = displayH + "px";
+      }
+
+      function getSelectionPoint(event) {
+        const source = event.touches?.[0] || event.changedTouches?.[0] || event;
+        return {
+          clientX: source.clientX,
+          clientY: source.clientY,
+        };
+      }
+
+      function beginSelection(event) {
+        if (app.dragging) return;
+        if (
+          event.type === "mousedown" &&
+          event.button !== 0 &&
+          event.which !== 1
+        ) {
+          return;
+        }
+        event.preventDefault();
+
+        const point = getSelectionPoint(event);
+        const rect = mosaicImg.getBoundingClientRect();
+        const localX = clamp(point.clientX - rect.left, 0, rect.width);
+        const localY = clamp(point.clientY - rect.top, 0, rect.height);
+
+        app.dragging = true;
+        app.startPoint = {
+          x: localX * (mosaicImg.naturalWidth / rect.width),
+          y: localY * (mosaicImg.naturalHeight / rect.height),
+        };
+        app.currentPoint = { ...app.startPoint };
+
+        placeSelectionOverlay(localX, localY, 0, 0);
+        selectionOverlay.style.display = "block";
+
+        setStatus("Drag across the mosaic to create a crop region.");
+      }
+
+      function moveSelection(event) {
+        if (!app.dragging || !app.startPoint) return;
+
+        event.preventDefault();
+        const point = getSelectionPoint(event);
+
+        const rect = mosaicImg.getBoundingClientRect();
+        const scaleX = mosaicImg.naturalWidth / rect.width;
+        const scaleY = mosaicImg.naturalHeight / rect.height;
+        const localX = clamp(point.clientX - rect.left, 0, rect.width);
+        const localY = clamp(point.clientY - rect.top, 0, rect.height);
+
+        const x = localX * scaleX;
+        const y = localY * scaleY;
+        app.currentPoint = { x, y };
+
+        const x1 = Math.min(app.startPoint.x, x);
+        const y1 = Math.min(app.startPoint.y, y);
+        const x2 = Math.max(app.startPoint.x, x);
+        const y2 = Math.max(app.startPoint.y, y);
+
+        placeSelectionOverlay(
+          x1 / scaleX,
+          y1 / scaleY,
+          (x2 - x1) / scaleX,
+          (y2 - y1) / scaleY,
+        );
+      }
+
+      function finalizeSelection(event) {
+        if (!app.dragging) return;
+
+        if (event) {
+          event.preventDefault();
+          moveSelection(event);
+        }
+
+        const x1 = Math.min(app.startPoint.x, app.currentPoint.x);
+        const y1 = Math.min(app.startPoint.y, app.currentPoint.y);
+        const x2 = Math.max(app.startPoint.x, app.currentPoint.x);
+        const y2 = Math.max(app.startPoint.y, app.currentPoint.y);
+
+        app.dragging = false;
+        selectionOverlay.style.display = "none";
+
+        if (x2 - x1 < 5 || y2 - y1 < 5) {
+          setStatus(
+            "Selection is too small. Drag a larger region on the mosaic.",
+            true,
+          );
+          return;
+        }
+
+        const left = clamp(Math.round(x1), 0, mosaicImg.naturalWidth - 1);
+        const top = clamp(Math.round(y1), 0, mosaicImg.naturalHeight - 1);
+        app.selection = {
+          x1: left,
+          y1: top,
+          width: clamp(Math.round(x2 - x1), 1, mosaicImg.naturalWidth - left),
+          height: clamp(Math.round(y2 - y1), 1, mosaicImg.naturalHeight - top),
+        };
+
+        cropFromSelection(app.selection);
+      }
+
+      function setupMosaicSelection() {
+        mosaicImg.addEventListener("pointerdown", (event) => {
+          beginSelection(event);
+          if (app.dragging && mosaicImg.setPointerCapture) {
+            mosaicImg.setPointerCapture(event.pointerId);
+          }
+        });
+        mosaicImg.addEventListener("pointermove", moveSelection);
+        mosaicImg.addEventListener("pointerup", finalizeSelection);
+        mosaicImg.addEventListener("pointercancel", finalizeSelection);
+        mosaicImg.addEventListener("mousedown", beginSelection);
+        mosaicImg.addEventListener("mousemove", moveSelection);
+        window.addEventListener("mouseup", finalizeSelection);
+        mosaicImg.addEventListener("touchstart", beginSelection, {
+          passive: false,
+        });
+        mosaicImg.addEventListener("touchmove", moveSelection, {
+          passive: false,
+        });
+        mosaicImg.addEventListener("touchend", finalizeSelection, {
+          passive: false,
+        });
+        mosaicImg.addEventListener("touchcancel", finalizeSelection, {
+          passive: false,
+        });
+      }
+
+      /* ---------- Image I/O ---------- */
+
+      function loadImage(url) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "Anonymous";
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+            const mat = new cv.Mat(
+              imageData.height,
+              imageData.width,
+              cv.CV_8UC4,
+            );
+            mat.data.set(imageData.data);
+            resolve(mat);
+          };
+          img.onerror = (err) => reject(err);
+          img.src = url;
+        });
+      }
+
+      function matToDataUrl(mat) {
+        const canvas = document.createElement("canvas");
+        cv.imshow(canvas, mat);
+        return canvas.toDataURL();
+      }
+
+      function setDims(id, width, height) {
+        document.getElementById(id).textContent =
+          width && height ? width + " × " + height : "— × —";
+      }
+
+      function cropFromSelection(selection) {
+        if (!app.mosaicMat) {
+          setStatus("The mosaic image has not loaded yet.", true);
+          return;
+        }
+
+        const rect = new cv.Rect(
+          selection.x1,
+          selection.y1,
+          selection.width,
+          selection.height,
+        );
+        const roi = app.mosaicMat.roi(rect);
+        const gray = new cv.Mat();
+        cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
+        roi.delete();
+
+        safeDelete(app.inputGray);
+        app.inputGray = gray;
+        inputImg.src = matToDataUrl(gray);
+        setDims("inputDims", gray.cols, gray.rows);
+
+        safeDelete(app.processedImage);
+        app.processedImage = null;
+        outputImg.src = "images/Layer-5.jpg";
+        setDims("outputDims");
+        clearSteps();
+        resetSeed();
+        app.otsuThreshold = null;
+        document.getElementById("segInfo").innerHTML = "";
+        updateMethodView();
+
+        setStatus(
+          "Input region selected (" +
+            gray.cols +
+            " × " +
+            gray.rows +
+            "). Choose a segmentation method and its parameters, then click Run.",
+        );
+      }
+
+      /* ---------- Controls ---------- */
+
+      const SLIDERS = {
+        t: 128,
+        t1: 64,
+        t2: 192,
+        delta: 20,
+        sigma: 10,
+      };
+
+      function getCheckedValue(name) {
+        return document.querySelector('input[name="' + name + '"]:checked')
+          ?.value;
+      }
+
+      function setChecked(name, value) {
+        document.querySelector(
+          'input[name="' + name + '"][value="' + value + '"]',
+        ).checked = true;
+      }
+
+      function getNumber(id) {
+        return Number(document.getElementById(id + "Value").value);
+      }
+
+      function setSliderValue(id, value) {
+        document.getElementById(id).value = value;
+        document.getElementById(id + "Value").value = value;
+      }
+
+      // Keep T1 <= T2.
+      function keepThresholdsOrdered(changed) {
+        const t1 = getNumber("t1");
+        const t2 = getNumber("t2");
+        if (t1 <= t2) return;
+        if (changed === "t1") setSliderValue("t2", t1);
+        else setSliderValue("t1", t2);
+      }
+
+      function bindSliderPair(id) {
+        const range = document.getElementById(id);
+        const number = document.getElementById(id + "Value");
+        const after = () => {
+          if (id === "t1" || id === "t2") keepThresholdsOrdered(id);
+          updateMethodView();
+        };
+        range.addEventListener("input", () => {
+          number.value = range.value;
+          after();
+        });
+        number.addEventListener("change", () => {
+          const value = clamp(
+            Math.round(Number(number.value) || 0),
+            Number(number.min),
+            Number(number.max),
+          );
+          number.value = value;
+          range.value = value;
+          after();
+        });
+      }
+
+      function readParams() {
+        return {
+          method: getCheckedValue("method") || "single",
+          t: getNumber("t"),
+          t1: getNumber("t1"),
+          t2: getNumber("t2"),
+          criterion: getCheckedValue("criterion") || "mean",
+          delta: getNumber("delta"),
+          sigma: getNumber("sigma"),
+          statsOver: getCheckedValue("statsOver") || "all",
+          connectivity: Number(getCheckedValue("connectivity") || 4),
+          seed: getSeed(),
+        };
+      }
+
+      function resetControls() {
+        setChecked("method", "single");
+        setChecked("criterion", "mean");
+        setChecked("statsOver", "all");
+        setChecked("connectivity", "4");
+        Object.keys(SLIDERS).forEach((id) => setSliderValue(id, SLIDERS[id]));
+        app.otsuThreshold = null;
+        document.getElementById("segInfo").innerHTML = "";
+        updateMethodView();
+      }
+
+      /* ---------- Seed point (click / tap on the input image) ---------- */
+
+      function getSeed() {
+        if (!app.inputGray) return null;
+        if (!app.seed) {
+          app.seed = {
+            x: Math.floor(app.inputGray.cols / 2),
+            y: Math.floor(app.inputGray.rows / 2),
+          };
+        }
+        return app.seed;
+      }
+
+      function resetSeed() {
+        app.seed = null;
+        placeSeedMarker();
+      }
+
+      // Rectangle actually covered by the image inside an object-fit: contain
+      // <img>, in client coordinates.
+      function imageContentRect(img, cols, rows) {
+        const rect = img.getBoundingClientRect();
+        const scale = Math.min(rect.width / cols, rect.height / rows);
+        const width = cols * scale;
+        const height = rows * scale;
+        return {
+          left: rect.left + (rect.width - width) / 2,
+          top: rect.top + (rect.height - height) / 2,
+          width,
+          height,
+          scale,
+        };
+      }
+
+      function placeSeedMarker() {
+        const marker = app.seedMarker;
+        const show =
+          app.inputGray && getCheckedValue("method") === "region";
+        marker.hidden = !show;
+        inputImg.classList.toggle("seed-mode", !!show);
+        if (!show) return;
+
+        const seed = getSeed();
+        const content = imageContentRect(
+          inputImg,
+          app.inputGray.cols,
+          app.inputGray.rows,
+        );
+        const box = inputImg.parentElement.getBoundingClientRect();
+        marker.style.left =
+          content.left - box.left + (seed.x + 0.5) * content.scale + "px";
+        marker.style.top =
+          content.top - box.top + (seed.y + 0.5) * content.scale + "px";
+        document.getElementById("seedText").textContent =
+          "Seed: (" +
+          seed.x +
+          ", " +
+          seed.y +
+          ") — click or tap the input image to move it.";
+      }
+
+      function setupSeedPicking() {
+        const marker = document.createElement("div");
+        marker.className = "seed-marker";
+        marker.hidden = true;
+        inputImg.parentElement.appendChild(marker);
+        app.seedMarker = marker;
+
+        inputImg.addEventListener("click", (event) => {
+          if (!app.inputGray || getCheckedValue("method") !== "region") return;
+          const content = imageContentRect(
+            inputImg,
+            app.inputGray.cols,
+            app.inputGray.rows,
+          );
+          const x = Math.floor((event.clientX - content.left) / content.scale);
+          const y = Math.floor((event.clientY - content.top) / content.scale);
+          if (x < 0 || y < 0 || x >= app.inputGray.cols || y >= app.inputGray.rows) {
+            return;
+          }
+          app.seed = { x, y };
+          placeSeedMarker();
+          setStatus(
+            "Seed moved to (" + x + ", " + y + ") with intensity " +
+              app.inputGray.data[y * app.inputGray.cols + x] +
+              ". Click Run to grow the region.",
+          );
+        });
+        window.addEventListener("resize", placeSeedMarker);
+      }
+
+      /* ---------- Histogram ---------- */
+
+      function computeHistogram(gray) {
+        const counts = new Array(256).fill(0);
+        for (let i = 0; i < gray.data.length; i++) counts[gray.data[i]] += 1;
+        return counts;
+      }
+
+      function histogramLayout(canvas) {
+        const width = canvas.clientWidth || 300;
+        const height = canvas.clientHeight || 170;
+        return { width, height, left: 8, right: 8, top: 8, bottom: 22 };
+      }
+
+      // Threshold lines to draw for the current method.
+      function currentThresholds(params) {
+        if (params.method === "single") return [params.t];
+        if (params.method === "double") return [params.t1, params.t2];
+        if (params.method === "otsu" && app.otsuThreshold != null) {
+          return [app.otsuThreshold];
+        }
+        return [];
+      }
+
+      function drawSegHistogram() {
+        const canvas = document.getElementById("segHist");
+        const L = histogramLayout(canvas);
+        const ratio = window.devicePixelRatio || 1;
+        canvas.width = L.width * ratio;
+        canvas.height = L.height * ratio;
+        const ctx = canvas.getContext("2d");
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, L.width, L.height);
+
+        const plotW = L.width - L.left - L.right;
+        const plotH = L.height - L.top - L.bottom;
+        const toX = (v) => L.left + (v / 255) * plotW;
+
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.fillStyle = "#5d6470";
+        ctx.font = "11px Segoe UI, sans-serif";
+        ctx.textAlign = "center";
+        [0, 64, 128, 192, 255].forEach((v) => {
+          ctx.beginPath();
+          ctx.moveTo(toX(v), L.top);
+          ctx.lineTo(toX(v), L.top + plotH);
+          ctx.stroke();
+          ctx.fillText(String(v), Math.min(Math.max(toX(v), 10), L.width - 12), L.height - 6);
+        });
+
+        const params = readParams();
+        const thresholds = currentThresholds(params);
+
+        if (app.inputGray) {
+          const counts = computeHistogram(app.inputGray);
+          const peak = Math.max(...counts) || 1;
+          const barW = plotW / 256;
+          counts.forEach((count, v) => {
+            const selected = isSelectedByThreshold(v, params);
+            ctx.fillStyle =
+              selected === null ? "#1f6feb" : selected ? "#1f6feb" : "#cbd5e1";
+            const h = (count / peak) * plotH;
+            ctx.fillRect(toX(v) - barW / 2, L.top + plotH - h, Math.max(barW, 0.8), h);
+          });
+        }
+
+        ctx.strokeStyle = "#ea580c";
+        ctx.lineWidth = 2;
+        thresholds.forEach((t) => {
+          ctx.beginPath();
+          ctx.moveTo(toX(t), L.top);
+          ctx.lineTo(toX(t), L.top + plotH);
+          ctx.stroke();
+        });
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#94a3b8";
+        ctx.strokeRect(L.left, L.top, plotW, plotH);
+      }
+
+      // true/false: whether gray level v goes to class 1 for threshold
+      // methods; null when the method is not a plain threshold.
+      function isSelectedByThreshold(v, params) {
+        if (params.method === "single") return v >= params.t;
+        if (params.method === "double") return v >= params.t1 && v <= params.t2;
+        if (params.method === "otsu" && app.otsuThreshold != null) {
+          return v >= app.otsuThreshold;
+        }
+        return null;
+      }
+
+      // Clicking the histogram moves the nearest threshold there.
+      function setupHistogramClicks() {
+        const canvas = document.getElementById("segHist");
+        canvas.addEventListener("click", (event) => {
+          const params = readParams();
+          if (params.method !== "single" && params.method !== "double") return;
+          const L = histogramLayout(canvas);
+          const rect = canvas.getBoundingClientRect();
+          const value = clamp(
+            Math.round(((event.clientX - rect.left - L.left) / (L.width - L.left - L.right)) * 255),
+            0,
+            255,
+          );
+          if (params.method === "single") {
+            setSliderValue("t", value);
+          } else if (Math.abs(value - params.t1) <= Math.abs(value - params.t2)) {
+            setSliderValue("t1", Math.min(value, params.t2));
+          } else {
+            setSliderValue("t2", Math.max(value, params.t1));
+          }
+          updateMethodView();
+        });
+      }
+
+      /* ---------- Segmentation ---------- */
+
+      function thresholdMask(gray, test) {
+        const mask = new cv.Mat(gray.rows, gray.cols, cv.CV_8UC1);
+        for (let i = 0; i < gray.data.length; i++) {
+          mask.data[i] = test(gray.data[i]) ? 255 : 0;
+        }
+        return mask;
+      }
+
+      // Otsu as in the theory: the T minimising the within-class variance
+      // w0·σ0² + w1·σ1², with class 0 = [0, T − 1] and class 1 = [T, 255].
+      function otsuThreshold(gray) {
+        const counts = computeHistogram(gray);
+        const total = gray.data.length;
+        let best = 1;
+        let bestWithin = Infinity;
+        for (let t = 1; t < 256; t++) {
+          let n0 = 0, s0 = 0, q0 = 0, n1 = 0, s1 = 0, q1 = 0;
+          for (let v = 0; v < 256; v++) {
+            const c = counts[v];
+            if (v < t) { n0 += c; s0 += c * v; q0 += c * v * v; }
+            else { n1 += c; s1 += c * v; q1 += c * v * v; }
+          }
+          if (!n0 || !n1) continue;
+          const var0 = q0 / n0 - (s0 / n0) ** 2;
+          const var1 = q1 / n1 - (s1 / n1) ** 2;
+          const within = (n0 / total) * var0 + (n1 / total) * var1;
+          if (within < bestWithin - 1e-9) {
+            bestWithin = within;
+            best = t;
+          }
+        }
+        return best;
+      }
+
+      // Region growing from the seed (breadth-first). A neighbour joins the
+      // region when it satisfies the criterion against the current region
+      // statistics (all pixels so far, or the last 10 added).
+      function regionGrow(gray, params) {
+        const W = gray.cols;
+        const H = gray.rows;
+        const data = gray.data;
+        const mask = cv.Mat.zeros(H, W, cv.CV_8UC1);
+        const queued = new Uint8Array(W * H);
+        const offsets =
+          params.connectivity === 8
+            ? [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]
+            : [[1, 0], [-1, 0], [0, 1], [0, -1]];
+
+        const recent = [];
+        let sum = 0;
+        let sumSq = 0;
+        let count = 0;
+        const add = (v) => {
+          if (params.statsOver === "last10") {
+            recent.push(v);
+            if (recent.length > 10) {
+              const old = recent.shift();
+              sum -= old;
+              sumSq -= old * old;
+              count -= 1;
+            }
+          }
+          sum += v;
+          sumSq += v * v;
+          count += 1;
+        };
+        const accepts = (v) => {
+          if (params.criterion === "variance") {
+            const n = count + 1;
+            const mean = (sum + v) / n;
+            const variance = Math.max(0, (sumSq + v * v) / n - mean * mean);
+            return Math.sqrt(variance) <= params.sigma;
+          }
+          return Math.abs(v - sum / count) <= params.delta;
+        };
+
+        const seed = params.seed.y * W + params.seed.x;
+        const queue = [seed];
+        queued[seed] = 1;
+        mask.data[seed] = 255;
+        add(data[seed]);
+        let size = 1;
+
+        for (let head = 0; head < queue.length; head++) {
+          const p = queue[head];
+          const px = p % W;
+          const py = (p - px) / W;
+          for (const [dx, dy] of offsets) {
+            const x = px + dx;
+            const y = py + dy;
+            if (x < 0 || y < 0 || x >= W || y >= H) continue;
+            const q = y * W + x;
+            if (queued[q]) continue;
+            queued[q] = 1;
+            if (accepts(data[q])) {
+              mask.data[q] = 255;
+              add(data[q]);
+              queue.push(q);
+              size += 1;
+            }
+          }
+        }
+        return { mask, size };
+      }
+
+      // Input in gray with the segmented pixels tinted.
+      function overlayMat(gray, mask) {
+        const out = new cv.Mat(gray.rows, gray.cols, cv.CV_8UC4);
+        for (let i = 0; i < gray.data.length; i++) {
+          const v = gray.data[i];
+          const on = mask.data[i] === 255;
+          out.data[i * 4] = on ? Math.round(v * 0.4 + 255 * 0.6) : v;
+          out.data[i * 4 + 1] = on ? Math.round(v * 0.4 + 88 * 0.6) : v;
+          out.data[i * 4 + 2] = on ? Math.round(v * 0.4 + 12 * 0.6) : v;
+          out.data[i * 4 + 3] = 255;
+        }
+        return out;
+      }
+
+      const METHOD_LABELS = {
+        single: "Single threshold",
+        double: "Double threshold",
+        otsu: "Otsu threshold",
+        region: "Region growing",
+      };
+
+      function ruleFor(params) {
+        if (params.method === "single") return "S = 1 if I ≥ " + params.t + ", else 0";
+        if (params.method === "double") {
+          return "S = 1 if " + params.t1 + " ≤ I ≤ " + params.t2 + ", else 0";
+        }
+        if (params.method === "otsu") {
+          return app.otsuThreshold == null
+            ? "S = 1 if I ≥ T*, T* = argmin w0·σ0² + w1·σ1²"
+            : "S = 1 if I ≥ " + app.otsuThreshold + " (T* from Otsu)";
+        }
+        return params.criterion === "variance"
+          ? "Add neighbour if σ of region with it ≤ " + params.sigma
+          : "Add neighbour if |I − μS| ≤ " + params.delta;
+      }
+
+      function describeRun(params) {
+        if (params.method === "otsu") {
+          return "Otsu threshold, T* = " + app.otsuThreshold;
+        }
+        if (params.method === "region") {
+          return (
+            "Region growing, " +
+            (params.criterion === "variance"
+              ? "σmax = " + params.sigma
+              : "Δ = " + params.delta) +
+            ", seed (" + params.seed.x + ", " + params.seed.y + ")"
+          );
+        }
+        return METHOD_LABELS[params.method] + ": " + ruleFor(params);
+      }
+
+      function updateMethodView() {
+        const params = readParams();
+        document.querySelectorAll("fieldset[data-methods]").forEach((group) => {
+          group.hidden = !group.dataset.methods.split(" ").includes(params.method);
+        });
+        document.getElementById("deltaRow").hidden = params.criterion !== "mean";
+        document.getElementById("sigmaRow").hidden = params.criterion !== "variance";
+        if (params.method !== "otsu") app.otsuThreshold = null;
+        document.getElementById("ruleText").textContent = ruleFor(params);
+        document.getElementById("histHint").textContent =
+          params.method === "single" || params.method === "double"
+            ? "Click the histogram to move the nearest threshold. Blue bars become 1 (white)."
+            : params.method === "otsu"
+              ? "Run to compute the threshold T* automatically."
+              : "Region growing uses connectivity, not the histogram alone.";
+        drawSegHistogram();
+        placeSeedMarker();
+      }
+
+      /* ---------- Run ---------- */
+
+      function clearSteps() {
+        document.getElementById("stepsGrid").innerHTML =
+          '<p class="hint">Run a segmentation to see the results here.</p>';
+      }
+
+      function addStepFigure(grid, src, caption) {
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = caption;
+        const figcaption = document.createElement("figcaption");
+        figcaption.textContent = caption;
+        figure.append(img, figcaption);
+        grid.appendChild(figure);
+      }
+
+      function renderInfo(rows) {
+        document.getElementById("segInfo").innerHTML = rows
+          .map((r) => "<div><dt>" + r[0] + "</dt><dd>" + r[1] + "</dd></div>")
+          .join("");
+      }
+
+      // Segments app.inputGray with the selected method and renders the mask,
+      // overlay and details. Returns the params used.
+      function runSegmentation() {
+        const params = readParams();
+        let mask;
+        let regionSize = null;
+
+        if (params.method === "region") {
+          const grown = regionGrow(app.inputGray, params);
+          mask = grown.mask;
+          regionSize = grown.size;
+        } else {
+          if (params.method === "otsu") app.otsuThreshold = otsuThreshold(app.inputGray);
+          mask = thresholdMask(app.inputGray, (v) => isSelectedByThreshold(v, params));
+        }
+
+        safeDelete(app.processedImage);
+        app.processedImage = mask;
+        outputImg.src = matToDataUrl(mask);
+        setDims("outputDims", mask.cols, mask.rows);
+
+        let selected = 0;
+        for (let i = 0; i < mask.data.length; i++) if (mask.data[i]) selected += 1;
+        const info = [["Pixels in class 1", selected + " (" + ((selected * 100) / mask.data.length).toFixed(1) + "%)"]];
+        if (params.method === "otsu") info.unshift(["Otsu T*", app.otsuThreshold]);
+        if (params.method === "region") {
+          info.unshift(["Seed intensity", app.inputGray.data[params.seed.y * app.inputGray.cols + params.seed.x]]);
+        }
+        renderInfo(info);
+
+        const grid = document.getElementById("stepsGrid");
+        grid.innerHTML = "";
+        addStepFigure(grid, inputImg.src, "Input");
+        addStepFigure(grid, outputImg.src, "Segmented (white = class 1)");
+        const overlay = overlayMat(app.inputGray, mask);
+        addStepFigure(grid, matToDataUrl(overlay), "Overlay on input");
+        overlay.delete();
+
+        updateMethodView();
+        document.getElementById("ruleText").textContent = ruleFor(params);
+        return params;
+      }
+
+      function setupControls() {
+        Object.keys(SLIDERS).forEach(bindSliderPair);
+        document
+          .querySelectorAll(
+            'input[name="method"], input[name="criterion"], input[name="statsOver"], input[name="connectivity"]',
+          )
+          .forEach((input) => input.addEventListener("change", updateMethodView));
+        setupSeedPicking();
+        setupHistogramClicks();
+        window.addEventListener("resize", drawSegHistogram);
+        updateMethodView();
+      }
+
+      function resetSimulation() {
+        safeDelete(app.inputGray);
+        safeDelete(app.processedImage);
+        app.inputGray = null;
+        app.processedImage = null;
+        app.selection = null;
+        app.dragging = false;
+        selectionOverlay.style.display = "none";
+
+        inputImg.src = "images/Layer-4.jpg";
+        outputImg.src = "images/Layer-5.jpg";
+        setDims("inputDims");
+        setDims("outputDims");
+        app.seed = null;
+        clearSteps();
+        resetControls();
+
+        setStatus(
+          "Simulation reset. Select a mosaic region, then choose a segmentation method and its parameters, then click Run.",
+        );
+      }
+
+      function onOpenCvReady() {
+        setupMosaicSelection();
+
+        loadImage("images/Mosaicsegment.png")
+          .then((mat) => {
+            app.mosaicMat = mat;
+            setStatus(
+              "OpenCV is ready. Drag or touch-drag on the mosaic to select an input region.",
+            );
+          })
+          .catch((err) => {
+            console.error(err);
+            setStatus("Could not load the mosaic image.", true);
+          });
+      }
+
+      document.getElementById("button1").addEventListener("click", () => {
+        mosaic.style.display = "block";
+        mosaic.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        setStatus(
+          "Drag or touch-drag a rectangle over the mosaic to select an input region.",
+        );
+      });
+
+      document.getElementById("button2").addEventListener("click", () => {
+        if (!app.inputGray) {
+          setStatus(
+            "Please select a valid region from the mosaic first.",
+            true,
+          );
+          return;
+        }
+        const params = runSegmentation();
+        setStatus("Processing complete (" + describeRun(params) + ").");
+      });
+      document
+        .getElementById("button4")
+        .addEventListener("click", resetSimulation);
+
+      setupControls();
+
+      function waitForOpenCv(maxAttempts) {
+        let attempts = 0;
+        const timer = setInterval(() => {
+          attempts += 1;
+          if (window.cv && typeof window.cv.Mat !== "undefined") {
+            clearInterval(timer);
+            onOpenCvReady();
+            return;
+          }
+          if (attempts >= maxAttempts) {
+            clearInterval(timer);
+            setStatus("OpenCV did not initialize correctly.", true);
+          }
+        }, 250);
+      }
+
+      if (window.cv && typeof window.cv.Mat !== "undefined") {
+        onOpenCvReady();
+      } else {
+        waitForOpenCv(120);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+The aim of this experiment is to study image segmentation for separating foreground objects or regions of interest from the background using histogram-based thresholding and region growing, and to understand how threshold selection and seed selection affect the segmentation result.
