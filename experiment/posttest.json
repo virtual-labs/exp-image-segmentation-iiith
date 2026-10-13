@@ -1,20 +1,158 @@
-[
-{"question":"1. Increasing the range in mean or variance based region growing results in larger size regions",
-"answers":{
-            "a":"True",
-            "b":"False",
-            "c":"False",
-            "d":"No effect"
-          },
-"correctAnswer":"a"},
-
-{"question":"2. The result of region growing will be affected if an image is corrupted with noise",
-"answers":{
-            "a":"True",
-            "b":"False",
-            "c":"Depends on the image content",
-            "d":"Depends on the type of noise"
-          },
-"correctAnswer":"c"}
-
-]
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Which condition is used in the single-threshold method to label a pixel as $1$?",
+      "answers": {
+        "a": "$I(x,y) \\geq T$",
+        "b": "$I(x,y) < T$",
+        "c": "$I(x,y) = 0$",
+        "d": "$I(x,y) = T+1$"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The single-threshold rule in the experiment labels a pixel as $1$ when $I(x,y) \\geq T$.",
+        "b": "Incorrect. This condition does not match the labeling rule given for the single-threshold method.",
+        "c": "Incorrect. A pixel is not labeled according only to whether its intensity equals zero.",
+        "d": "Incorrect. The threshold rule does not require the pixel intensity to equal a value one greater than $T$."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. Which statement best describes a bi-modal image histogram?",
+      "answers": {
+        "a": "It contains no intensity variation",
+        "b": "It contains two distinct peaks",
+        "c": "It contains only one intensity value",
+        "d": "It contains an equal number of pixels at every intensity"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. A bi-modal histogram represents distinct intensity groups rather than an absence of intensity variation.",
+        "b": "Correct. A bi-modal histogram has two distinct peaks and can support separation of foreground and background using a single threshold.",
+        "c": "Incorrect. A histogram with only one intensity value is not bi-modal.",
+        "d": "Incorrect. Equal frequency across all intensities describes a different distribution from the bi-modal case."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. In region growing, pixels are accumulated into a region based on a test for",
+      "answers": {
+        "a": "Image file size",
+        "b": "Pixel coordinates only",
+        "c": "Homogeneity or similarity",
+        "d": "Image rotation"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. File size is not the criterion used to decide whether a neighboring pixel belongs to the growing region.",
+        "b": "Incorrect. Coordinates identify pixel locations but do not provide the similarity test used for region inclusion.",
+        "c": "Correct. Region growing uses a homogeneity or similarity criterion to decide whether neighboring pixels should be included.",
+        "d": "Incorrect. Rotation is not the test used to determine whether pixels are added to the region."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. OTSU thresholding is described as an automatic threshold-selection method because it",
+      "answers": {
+        "a": "selects the threshold by analyzing the image histogram",
+        "b": "always uses a manually chosen threshold",
+        "c": "does not use pixel intensity information",
+        "d": "selects the threshold from the image dimensions"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The experiment describes OTSU as an automatic method that selects a threshold by analyzing the image histogram.",
+        "b": "Incorrect. A manually selected threshold is characteristic of manual thresholding rather than the automatic method described here.",
+        "c": "Incorrect. OTSU depends on the distribution of image intensities.",
+        "d": "Incorrect. Image dimensions are not the basis for the threshold-selection procedure described for OTSU."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. In region growing, which criterion can be used to decide whether a neighboring pixel is similar to the current region?",
+      "answers": {
+        "a": "Whether its file name matches the input image",
+        "b": "Whether its intensity is within a predefined range of the mean value of the current region",
+        "c": "Whether its coordinates are identical to the seed coordinates",
+        "d": "Whether it changes the image dimensions"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. File naming is unrelated to the similarity test used in region growing.",
+        "b": "Correct. One criterion described in the experiment includes a neighboring pixel when its intensity lies within a predefined range of the mean value of the current region.",
+        "c": "Incorrect. Neighboring pixels necessarily have locations different from the seed, so coordinate identity is not the stated criterion.",
+        "d": "Incorrect. Region growing does not use changes in image dimensions as its similarity criterion."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. Which statement correctly compares single thresholding and region growing as presented in this experiment?",
+      "answers": {
+        "a": "Both methods require a seed pixel as their starting point",
+        "b": "Single thresholding uses image intensity relative to a threshold, whereas region growing starts from a seed and evaluates neighboring pixels",
+        "c": "Region growing always uses a bi-modal histogram, whereas single thresholding does not use intensity",
+        "d": "Both methods operate by changing the spatial resolution of the image"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. A seed pixel is specifically part of the region-growing procedure, not the single-threshold rule.",
+        "b": "Correct. Single thresholding labels pixels according to their intensity relative to a threshold, while region growing begins from a seed and evaluates neighboring pixels using a similarity criterion.",
+        "c": "Incorrect. This reverses the roles of histogram information and seed-based region formation described in the experiment.",
+        "d": "Incorrect. Neither method is defined as changing the spatial resolution of the image."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. Suppose an 8-bit image is processed using OTSU thresholding. Over which intensity range is the threshold $T$ selected according to the experiment?",
+      "answers": {
+        "a": "$1$ to $254$",
+        "b": "$0$ to $128$",
+        "c": "$128$ to $255$",
+        "d": "$0$ to $255$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. This range excludes intensity values that the experiment includes when considering possible thresholds.",
+        "b": "Incorrect. The experiment does not restrict the OTSU search to the lower half of the intensity range.",
+        "c": "Incorrect. The experiment does not restrict the OTSU search to the upper half of the intensity range.",
+        "d": "Correct. For the 8-bit intensity range used in the experiment, the threshold is selected from $0$ to $255$ by minimizing the within-class variance."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "8. If an image contains $k$ objects to be segmented using the region-growing method described in the experiment, how many separate applications of the method are required?",
+      "answers": {
+        "a": "Exactly one",
+        "b": "Exactly two",
+        "c": "Exactly $k$",
+        "d": "Exactly $k+1$"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. A single application is described as segmenting one object at a time.",
+        "b": "Incorrect. The required number of applications depends on the number of objects to be segmented.",
+        "c": "Correct. The experiment states that region growing can segment only one object at a time, so $k$ objects require $k$ applications.",
+        "d": "Incorrect. The experiment does not require an additional application beyond the number of objects."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "9. In OTSU thresholding, the foreground and background are treated as two classes. Which statement describes the objective used to choose $T$?",
+      "answers": {
+        "a": "Choose $T$ to maximize the image dimensions",
+        "b": "Choose $T$ to minimize the weighted within-class variance",
+        "c": "Choose $T$ so that every pixel has the same intensity",
+        "d": "Choose $T$ only from the location of the seed pixel"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Image dimensions are not the objective used in the OTSU threshold calculation.",
+        "b": "Correct. OTSU selects the threshold that minimizes the weighted within-class variance of the foreground and background classes.",
+        "c": "Incorrect. The objective is to separate intensity classes, not to make all image pixels equal.",
+        "d": "Incorrect. A seed pixel is part of region growing and is not used as the basis for the OTSU threshold."
+      },
+      "difficulty": "advanced"
+    }
+  ]
+}
